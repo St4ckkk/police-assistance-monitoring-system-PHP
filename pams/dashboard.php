@@ -33,31 +33,32 @@
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#pages" aria-expanded="false" aria-controls="pages">
                             <i class="fa-regular fa-file-lines pe-2"></i>
-                            Logs
+                            Complaint Logs
                         </a>
                         <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
-                                <a href="addcaller.php" class="sidebar-link">Report Incident</a>
+                                <a href="callerinfo.php" class="sidebar-link">Complaints</a>
                             </li>
+                        </ul>
+                        <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
-                                <a href="callerinfo.php" class="sidebar-link">Report History</a>
+                                <a href="records.php" class="sidebar-link">Records</a>
                             </li>
                         </ul>
                     </li>
                     <li class="sidebar-item">
-
+                        <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard" aria-expanded="false" aria-controls="dashboard">
+                            <i class="fa-solid fa-book pe-2"></i>
+                            Police Records
+                        </a>
                         <ul id="dashboard" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
-                                <a href="addreport.php" class="sidebar-link">Add Report</a>
+                                <a href="reports.php" class="sidebar-link">Police</a>
                             </li>
                         </ul>
-                        <ul id="dashboard" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                            <li class="sidebar-item">
-                                <a href="reports.php" class="sidebar-link">Reports</a>
-                            </li>
-                        </ul>
+                    </li>
                     <li a class="sidebar-item">
-                        <a href="dashboard.php" class="sidebar-link">
+                        <a href="logout.php" class="sidebar-link">
                             <i class="fa-solid fa-right-from-bracket"></i>
                             Log Out
                         </a>
@@ -74,11 +75,56 @@
                 <button class="btn" type="button" data-bs-theme="dark">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <h1>Dashboard</h1>
             </nav>
             <main class="content px-3 py-2">
                 <div class="container-fluid">
                     <div class="mb-3">
+                        <div class="container-fluid d-flex justify-content-center">
+                            <div class="card col-md-3 m-5">
+                                <h5>All Reports:</h5>
+                                <?php
+                                include 'database.php';
+
+                                $dash_category_query = "SELECT * FROM reports";
+                                $dash_category_query_run = mysqli_query($conn, $dash_category_query);
+                                if ($category_total = mysqli_num_rows($dash_category_query_run)) {
+                                    echo '<h4 class="mb-0"> ' . $category_total . ' </h4>';
+                                } else {
+                                    echo '<h4 class="mb-0">0</h4>';
+                                }
+                                ?>
+                            </div>
+                            <div class="status card col-md-3 m-5">
+                                <h5>Ongoing Reports:</h5>
+                                <?php
+                                include 'database.php';
+
+                                $dash_category_query = "SELECT * FROM reports WHERE status='OnGoing' ";
+                                $dash_category_query_run = mysqli_query($conn, $dash_category_query);
+                                if ($category_total = mysqli_num_rows($dash_category_query_run)) {
+                                    echo '<h4 class="mb-0"> ' . $category_total . ' </h4>';
+                                } else {
+                                    echo '<h4 class="mb-0"> 0 </h4>';
+                                }
+                                ?>
+                            </div>
+                            <div class="card col-md-3 m-5">
+                                <h5>Completed Reports:</h5>
+                                <?php
+                                include 'database.php';
+
+                                $dash_category_query = "SELECT * FROM reports WHERE status='Done' ";
+                                $dash_category_query_run = mysqli_query($conn, $dash_category_query);
+                                if ($category_total = mysqli_num_rows($dash_category_query_run)) {
+                                    echo '<h4 class="mb-0"> ' . $category_total . ' </h4>';
+                                } else {
+                                    echo '<h4 class="mb-0">0</h4>';
+                                }
+                                ?>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
             </main>

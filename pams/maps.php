@@ -19,12 +19,12 @@ if (isset($_GET['location'])) {
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqIyP7wRCkaJqVUMK2x-Ypz20oGqLjSjc&libraries=places"></script>
-<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-<script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" />
-<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" />
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -36,23 +36,26 @@ if (isset($_GET['location'])) {
 
 <style>
     .container {
-  display: flex; /* Use flexbox to align items in a row */
-  margin-top: 5vh;
-  margin-bottom: 5vh;
-}
-    .status {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin: 5px;
-}
+        display: flex;
+        /* Use flexbox to align items in a row */
+        margin-top: 5vh;
+        margin-bottom: 5vh;
+    }
 
-/* Styles for the completed reports card */
-.card {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin: 5px;
-}
+    .status {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin: 5px;
+    }
+
+    /* Styles for the completed reports card */
+    .card {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin: 5px;
+    }
 </style>
+
 <body>
 
     <div class="wrapper">
@@ -76,33 +79,32 @@ if (isset($_GET['location'])) {
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#pages" aria-expanded="false" aria-controls="pages">
                             <i class="fa-regular fa-file-lines pe-2"></i>
-                            Logs
+                            Complaint Logs
                         </a>
                         <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
-                                <a href="addcaller.php" class="sidebar-link">Report Incident</a>
+                                <a href="callerinfo.php" class="sidebar-link">Complaints</a>
                             </li>
-                            <li class="sidebar-item">
-                                <a href="callerinfo.php" class="sidebar-link">Reports</a>
-                            </li>
+                        </ul>
+                        <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
                                 <a href="records.php" class="sidebar-link">Records</a>
                             </li>
                         </ul>
                     </li>
                     <li class="sidebar-item">
+                        <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard" aria-expanded="false" aria-controls="dashboard">
+                            <i class="fa-solid fa-book pe-2"></i>
+                            Police Records
+                        </a>
                         <ul id="dashboard" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
-                                <a href="addreport.php" class="sidebar-link">Add Report</a>
+                                <a href="reports.php" class="sidebar-link">Police</a>
                             </li>
                         </ul>
-                        <ul id="dashboard" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                            <li class="sidebar-item">
-                                <a href="reports.php" class="sidebar-link">Reports</a>
-                            </li>
-                        </ul>
+                    </li>
                     <li a class="sidebar-item">
-                        <a href="dashboard.php" class="sidebar-link">
+                        <a href="logout.php" class="sidebar-link">
                             <i class="fa-solid fa-right-from-bracket"></i>
                             Log Out
                         </a>
@@ -139,49 +141,49 @@ if (isset($_GET['location'])) {
         var infowindow;
 
         function initialize() {
-    var pyrmont = new google.maps.LatLng(12.8797, 121.7740);
+            var pyrmont = new google.maps.LatLng(12.8797, 121.7740);
 
-    var map = new google.maps.Map(document.getElementById('map'), {
-        center: pyrmont,
-        zoom: 5
-    });
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: pyrmont,
+                zoom: 5
+            });
 
-    var input = document.getElementById('searchTextField');
+            var input = document.getElementById('searchTextField');
 
-    var autocomplete = new google.maps.places.Autocomplete(input); 
+            var autocomplete = new google.maps.places.Autocomplete(input);
 
-    autocomplete.bindTo('bounds', map);
+            autocomplete.bindTo('bounds', map);
 
-    var marker = new google.maps.Marker({
-        map: map,
-        visible: false 
-    });
+            var marker = new google.maps.Marker({
+                map: map,
+                visible: false
+            });
 
-    google.maps.event.addListener(autocomplete, 'place_changed', function() {
-        var place = autocomplete.getPlace();
+            google.maps.event.addListener(autocomplete, 'place_changed', function() {
+                var place = autocomplete.getPlace();
 
-        if (!place.geometry || !place.geometry.location) {
-       
-            return;
+                if (!place.geometry || !place.geometry.location) {
+
+                    return;
+                }
+
+                if (place.geometry.viewport) {
+                    map.fitBounds(place.geometry.viewport);
+                } else {
+                    map.setCenter(place.geometry.location);
+                    map.setZoom(17);
+                }
+
+                marker.setPosition(place.geometry.location);
+                marker.setVisible(true);
+            });
         }
 
-        if (place.geometry.viewport) {
-            map.fitBounds(place.geometry.viewport);
-        } else {
-            map.setCenter(place.geometry.location);
-            map.setZoom(17);
-        }
-
-        marker.setPosition(place.geometry.location);
-        marker.setVisible(true);
-    });
-}
-
-google.maps.event.addDomListener(window, 'load', initialize);
+        google.maps.event.addDomListener(window, 'load', initialize);
 
         google.maps.event.addDomListener(window, 'load', initialize)
     </script>
-   
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js" integrity="sha512-7VTiy9AhpazBeKQAlhaLRUk+kAMAb8oczljuyJHPsVPWox/QIXDFOnT9DUk1UC8EbnHKRdQowT7sOBe7LAjajQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -194,4 +196,3 @@ google.maps.event.addDomListener(window, 'load', initialize);
 </body>
 
 </html>
-

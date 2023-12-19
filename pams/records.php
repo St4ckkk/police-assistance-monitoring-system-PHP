@@ -8,14 +8,14 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css" />
-    
-<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
-<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-<script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" />
-<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" />
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -26,23 +26,26 @@
 </head>
 <style>
     .container {
-  display: flex; /* Use flexbox to align items in a row */
-  margin-top: 5vh;
-  margin-bottom: 5vh;
-}
-    .status {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin: 5px;
-}
+        display: flex;
+        /* Use flexbox to align items in a row */
+        margin-top: 5vh;
+        margin-bottom: 5vh;
+    }
 
-/* Styles for the completed reports card */
-.card {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin: 5px;
-}
+    .status {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin: 5px;
+    }
+
+    /* Styles for the completed reports card */
+    .card {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin: 5px;
+    }
 </style>
+
 <body>
     <!--Edit modal-->
     <div class="modal fade" id="editmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -71,15 +74,11 @@
                             <input type="date" name="date" id="date" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label>Incident_Type</label>
-                            <input type="text" name="incident" id="incident" class="form-control">
-                        </div> 
-                        <div class="form-group">
                             <label>Instruction</label>
                             <input type="text" name="instruction" id="instruction" class="form-control">
-                        </div>  
+                        </div>
                         <div class="modal-footer">
-               
+
                             <button type="submit" name="update" class="btn btn-primary">update data</button>
                         </div>
                     </form>
@@ -89,38 +88,17 @@
             </div>
         </div>
     </div>
-       <!--Delete modal-->
-       <div class="modal fade" id="deletemodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!--Delete modal-->
+    <div class="modal fade" id="deletemodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog  modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
                     <form method="POST">
                         <div class="form-group">
                             <input type="hidden" name="delete_id" id="delete_id" class="form-control">
-
                         </div>
                         <div class="text-center">
                             <button type="submit" name="deletedata" class="btn btn-primary">Delete data</button>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <!--Delete modal-->
-    <div class="modal fade" id="ups" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog  modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <form method="POST">
-                        <div class="form-group">
-                            <input type="hidden" name="delete_ids" id="delete_ids" class="form-control">
-
-                            <input type="hidden" id="myInputField" name="status">
-                        </div>
-                        <div class="text-center">
-                            <button type="submit" name="done" class="btn btn-primary">Report Done</button>
                         </div>
                     </form>
                 </div>
@@ -149,31 +127,30 @@
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#pages" aria-expanded="false" aria-controls="pages">
                             <i class="fa-regular fa-file-lines pe-2"></i>
-                            Logs
+                            Complaint Logs
                         </a>
                         <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
-                                <a href="addcaller.php" class="sidebar-link">Report Incident</a>
+                                <a href="callerinfo.php" class="sidebar-link">Complaints</a>
                             </li>
-                            <li class="sidebar-item">
-                                <a href="callerinfo.php" class="sidebar-link">Reports</a>
-                            </li>
+                        </ul>
+                        <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
                                 <a href="records.php" class="sidebar-link">Records</a>
                             </li>
                         </ul>
                     </li>
                     <li class="sidebar-item">
+                        <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard" aria-expanded="false" aria-controls="dashboard">
+                            <i class="fa-solid fa-book pe-2"></i>
+                            Police Records
+                        </a>
                         <ul id="dashboard" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
-                                <a href="addreport.php" class="sidebar-link">Add Report</a>
+                                <a href="reports.php" class="sidebar-link">Police</a>
                             </li>
                         </ul>
-                        <ul id="dashboard" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                            <li class="sidebar-item">
-                                <a href="reports.php" class="sidebar-link">Reports</a>
-                            </li>
-                        </ul>
+                    </li>
                     <li a class="sidebar-item">
                         <a href="logout.php" class="sidebar-link">
                             <i class="fa-solid fa-right-from-bracket"></i>
@@ -198,48 +175,20 @@
                 <div class="container-fluid">
                     <div class="mb-3">
                         <div class="container">
-                        <div class="card col-md-3">
-                            <h5>All Reports:</h5>
-                            <?php
-                        include 'database.php';
+                            <div class="card col-md-3">
+                                <h5>All Records:</h5>
+                                <?php
+                                include 'database.php';
 
-                        $dash_category_query = "SELECT * FROM reports";
-                        $dash_category_query_run = mysqli_query($conn, $dash_category_query);
-                        if ($category_total = mysqli_num_rows($dash_category_query_run)) {
-                            echo '<h4 class="mb-0"> ' . $category_total . ' </h4>';
-                        } else {
-                            echo '<h4 class="mb-0">0</h4>';
-                        }
-                        ?>
-                        </div>
-                        <div class="status card col-md-3">
-                            <h5>Ongoing Reports:</h5>
-                            <?php
-                        include 'database.php';
-
-                        $dash_category_query = "SELECT * FROM reports WHERE status='OnGoing' ";
-                        $dash_category_query_run = mysqli_query($conn, $dash_category_query);
-                        if ($category_total = mysqli_num_rows($dash_category_query_run)) {
-                            echo '<h4 class="mb-0"> ' . $category_total . ' </h4>';
-                        } else {
-                            echo '<h4 class="mb-0"> 0 </h4>';
-                        }
-                        ?>
-                        </div>
-                        <div class="card col-md-3">
-                            <h5>Completed Reports:</h5>
-                            <?php
-                        include 'database.php';
-
-                        $dash_category_query = "SELECT * FROM reports WHERE status='Done' ";
-                        $dash_category_query_run = mysqli_query($conn, $dash_category_query);
-                        if ($category_total = mysqli_num_rows($dash_category_query_run)) {
-                            echo '<h4 class="mb-0"> ' . $category_total . ' </h4>';
-                        } else {
-                            echo '<h4 class="mb-0">0</h4>';
-                        }
-                        ?>
-                        </div>
+                                $dash_category_query = "SELECT * FROM reports";
+                                $dash_category_query_run = mysqli_query($conn, $dash_category_query);
+                                if ($category_total = mysqli_num_rows($dash_category_query_run)) {
+                                    echo '<h4 class="mb-0"> ' . $category_total . ' </h4>';
+                                } else {
+                                    echo '<h4 class="mb-0">0</h4>';
+                                }
+                                ?>
+                            </div>
                         </div>
                         <table class="table table-dark table-hover" id="myTable">
                             <thead>
@@ -248,11 +197,8 @@
                                     <th scope="col">Location</th>
                                     <th scope="col">Contact</th>
                                     <th scope="col">Date</th>
-                                    <th scope="col">Incident_Type</th>
-                                    <th scope="col">Instruction</th>
-                                    <th scope="col">Action</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Action</th>
+                                    <th scope="col">incident_type</th>
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -262,7 +208,7 @@
 
 
 
-                                $sql = "SELECT * FROM reports";
+                                $sql = "SELECT * FROM records";
                                 $query_run = mysqli_query($conn, $sql);
 
                                 if (mysqli_num_rows($query_run) > 0) {
@@ -274,17 +220,6 @@
                                             <td><?= $report['contact'] ?></td>
                                             <td><?= $report['date'] ?></td>
                                             <td><?= $report['incident_type'] ?></td>
-                                            <td><?= $report['instruction'] ?></td>
-
-                                            <td>     
-                                                <button type="button" class="btn btn-danger deletebtn" name="deletebtn"><i class="fa-solid fa-trash"></i></button>
-                                                <button type="button" class="btn btn-primary editbtn" name="editbtn"><i class='bx bx-edit-alt'></i></button>
-                                                <button type="button" class="btn btn-success up" name="up"><i class='bx bx-check' ></i></button>
-                                            </td>
-                                            <td><?= $report['status'] ?></td>
-                                            <td>
-                                            <a href="maps.php?location=<?= urlencode($report['location']) ?>">See Map Location</a>
-                                            </td>
 
                                         </tr>
                                 <?php
@@ -303,10 +238,10 @@
         </div>
     </div>
     <script>
-  $(document).ready( function () {
-    $('#mytable').DataTable();
-  });
-</script>
+        $(document).ready(function() {
+            $('#mytable').DataTable();
+        });
+    </script>
     <script>
         $(document).ready(function() {
             $('.editbtn').on('click', function() {
@@ -325,34 +260,13 @@
                 $('#location').val(data[1]);
                 $('#contact').val(data[2]);
                 $('#date').val(data[3]);
-                $('#incident').val(data[4]);
-                $('#instruction').val(data[5]);
+                $('#instruction').val(data[4]);
 
 
             });
         });
     </script>
-        <script>
-        $(document).ready(function() {
-            $('.up').on('click', function() {
-
-                $('#ups').modal('show');
-
-                $tr = $(this).closest('tr');
-
-                var data = $tr.children("td").map(function() {
-                    return $(this).text();
-                }).get();
-
-                console.log(data);
-
-                $('#delete_ids').val(data[0]);
-
-
-            });
-        });
-    </script>
-        <script>
+    <script>
         $(document).ready(function() {
             $('.deletebtn').on('click', function() {
 
@@ -373,19 +287,10 @@
             });
         });
     </script>
-        <script>
-document.addEventListener("DOMContentLoaded", function() {
-
-    var inputField = document.getElementById("myInputField");
-    
- 
-    inputField.value = "Done";
-});
-</script>
     <script>
-        $(document).ready( function () {
-    $('#myTable').DataTable();
-} );
+        $(document).ready(function() {
+            $('#myTable').DataTable();
+        });
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js" integrity="sha512-7VTiy9AhpazBeKQAlhaLRUk+kAMAb8oczljuyJHPsVPWox/QIXDFOnT9DUk1UC8EbnHKRdQowT7sOBe7LAjajQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -399,7 +304,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 
 </html>
-<!--upadate code--> 
+<!--upadate code-->
 <?php
 include 'database.php';
 
@@ -409,10 +314,9 @@ if (isset($_POST['update'])) {
     $location = $_POST['location'];
     $contact = $_POST['contact'];
     $date = $_POST['date'];
-    $incident = $_POST['incident'];
     $instruction = $_POST['instruction'];
 
-    $query = "UPDATE reports SET location='$location', contact='$contact', date='$date', incident_type='$incident', instruction='$instruction' WHERE id='$id'";
+    $query = "UPDATE reports SET location='$location', contact='$contact', date='$date', instruction='$instruction' WHERE id='$id'";
     $query_run = mysqli_query($conn, $query);
 
     if ($query_run) {
@@ -464,7 +368,7 @@ if (isset($_POST['deletedata'])) {
     $query_run = mysqli_query($conn, $query);
 
     if ($query_run) {
-        ?>
+?>
         <script>
             let timerIntervals
             Swal.fire({
@@ -498,186 +402,3 @@ if (isset($_POST['deletedata'])) {
 }
 
 ?>
-
-<?php
-include 'database.php';
-
-if (isset($_POST['done'])) {
-
-    $id = $_POST['delete_ids'];
-    $status = $_POST['status'];
-
-    $query = "UPDATE report SET status='$status' WHERE id='$id'";
-    $query_run = mysqli_query($conn, $query);
-
-    if ($query_run) {
-
-    } else {
-    }
-}
-
-?>
-
-<?php
-include 'database.php';
-
-if (isset($_POST['update'])) {
-
-    $id = $_POST['id'];
-    $location = $_POST['location'];
-    $contact = $_POST['contact'];
-    $date = $_POST['date'];
-    $incident = $_POST['incident'];
-    $instruction = $_POST['instruction'];
-
-    $query = "UPDATE report SET location='$location', contact='$contact', date='$date', incident_type='$incident', instruction='$instruction' WHERE id='$id'";
-    $query_run = mysqli_query($conn, $query);
-
-    if ($query_run) {
-?>
-        <script>
-            let timerIntervalss
-            Swal.fire({
-                title: 'Updating Data',
-                html: 'I will close in <b></b> milliseconds.',
-                timer: 2000,
-                timerProgressBar: true,
-                didOpen: () => {
-                    Swal.showLoading()
-                    const b = Swal.getHtmlContainer().querySelector('b')
-                    timerIntervalss = setInterval(() => {
-                        b.textContent = Swal.getTimerLeft()
-                    }, 100)
-                },
-                willClose: () => {
-                    clearInterval(timerIntervalss)
-                }
-            }).then((result) => {
-                /* Read more about handling dismissals below */
-                if (result.dismiss === Swal.DismissReason.timer) {
-                    location.href = "callerinfo.php"
-                }
-            })
-        </script>
-
-
-
-<?php
-
-    } else {
-    }
-}
-
-?>
-
-<?php
-include 'database.php';
-
-if (isset($_POST['update'])) {
-
-    $id = $_POST['id'];
-    $location = $_POST['location'];
-    $contact = $_POST['contact'];
-    $date = $_POST['date'];
-    $incident = $_POST['incident'];
-    $instruction = $_POST['instruction'];
-
-    $query = "UPDATE records SET location='$location', contact='$contact', date='$date', incident_type='$incident', instruction='$instruction' WHERE id='$id'";
-    $query_run = mysqli_query($conn, $query);
-
-    if ($query_run) {
-?>
-        <script>
-            let timerIntervalsss
-            Swal.fire({
-                title: 'Updating Data',
-                html: 'I will close in <b></b> milliseconds.',
-                timer: 2000,
-                timerProgressBar: true,
-                didOpen: () => {
-                    Swal.showLoading()
-                    const b = Swal.getHtmlContainer().querySelector('b')
-                    timerIntervalsss = setInterval(() => {
-                        b.textContent = Swal.getTimerLeft()
-                    }, 100)
-                },
-                willClose: () => {
-                    clearInterval(timerIntervalsss)
-                }
-            }).then((result) => {
-                /* Read more about handling dismissals below */
-                if (result.dismiss === Swal.DismissReason.timer) {
-                    location.href = "callerinfo.php"
-                }
-            })
-        </script>
-
-
-
-<?php
-
-    } else {
-    }
-}
-
-?>
-
-
-<?php
-include 'database.php';
-
-if (isset($_POST['done'])) {
-
-    $id = $_POST['delete_ids'];
-    $status = $_POST['status'];
-
-    $query = "UPDATE reports SET status='$status' WHERE id='$id'";
-    $query_run = mysqli_query($conn, $query);
-
-    if ($query_run) {
-?>
-        <script>
-
-
-        </script>
-
-
-
-<?php
-
-    } else {
-    }
-}
-
-?>
-
-<?php
-include 'database.php';
-
-if (isset($_POST['done'])) {
-
-    $id = $_POST['delete_ids'];
-    $status = $_POST['status'];
-
-    $query = "UPDATE report SET status='$status' WHERE id='$id'";
-    $query_run = mysqli_query($conn, $query);
-
-    if ($query_run) {
-?>
-        <script>
-
-
-        </script>
-
-
-
-<?php
-
-    } else {
-    }
-}
-
-?>
-
-
-

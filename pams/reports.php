@@ -63,7 +63,7 @@
                             </li>
                         </ul>
                         <li a class="sidebar-item">
-                        <a href="dashboard.php" class="sidebar-link">
+                        <a href="logout.php" class="sidebar-link">
                         <i class="fa-solid fa-right-from-bracket"></i>
                             Log Out
                         </a>

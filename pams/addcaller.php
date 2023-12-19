@@ -17,10 +17,10 @@
 <body>
     <div class="wrapper">
         <!-- Sidebar -->
-        <aside id="sidebar">
+         <aside id="sidebar">
             <div class="h-100">
                 <div class="sidebar-logo">
-                    <a href="dashboard.php">PAMS</a>
+                    <a href="#">PAMS</a>
                 </div>
                 <!-- Sidebar Navigation -->
                 <ul class="sidebar-nav">
@@ -43,9 +43,11 @@
                                 <a href="addcaller.php" class="sidebar-link">Report Incident</a>
                             </li>
                             <li class="sidebar-item">
-                                <a href="callerinfo.php" class="sidebar-link">Report History</a>
+                                <a href="callerinfo.php" class="sidebar-link">Reports</a>
                             </li>
-
+                            <li class="sidebar-item">
+                                <a href="records.php" class="sidebar-link">Records</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="sidebar-item">
@@ -60,7 +62,7 @@
                             </li>
                         </ul>
                     <li a class="sidebar-item">
-                        <a href="dashboard.php" class="sidebar-link">
+                        <a href="logout.php" class="sidebar-link">
                             <i class="fa-solid fa-right-from-bracket"></i>
                             Log Out
                         </a>
@@ -69,7 +71,7 @@
 
                 </ul>
             </div>
-        </aside>
+         </aside>
         <!-- Main Component -->
         <div class="main">
             <nav class="navbar navbar-expand px-3 border-bottom">
@@ -83,8 +85,7 @@
                 <div class="container-fluid">
                     <div class="mb-3">
                         <div class="container">
-                            <form action="" method="POST" enctype="multipart/form-data">
-
+                            <form action="" method="POST">
 
                                 <br>
 
@@ -94,7 +95,7 @@
 
                                 <label for="contact" class="form-label">Contact</label>
                                 <input type="number" class="form-control" name="contact" id="contact" placeholder="09XX-XXX-XXXX" required>
-                                <br>
+
                                 <label for="date" class="form-label">Date</label>
                                 <input type="date" class="form-control" name="date" id="date" placeholder="" required>
 
@@ -113,13 +114,12 @@
 
                                     </select>
                                 </div>
-                                <br>
-                                <label for="evidencePicture" class="form-label">Evidence Picture:</label>
-                                <input type="file" id="evidencePicture" name="evidencePicture" accept="image/*" class="form-control" required>
+
                                 <label for="callend" class="form-label">Special Instructions</label>
-                                <textarea name="instruction" id="instruction" size="6" class="form-control"></textarea>
+                                <input type="text" class="form-control" name="instruction" id="instruction" placeholder="Input here" required>
 
                                 <input type="hidden" id="myInputField" name="status">
+
                                 <hr>
                                 <input class="btn btn-outline-success" type="submit" name="submit" value="Submit">
 
@@ -134,14 +134,14 @@
         </div>
     </div>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function() {
 
-            var inputField = document.getElementById("myInputField");
-
-
-            inputField.value = "OnGoing";
-        });
-    </script>
+    var inputField = document.getElementById("myInputField");
+    
+ 
+    inputField.value = "OnGoing";
+});
+</script>
 
     <script type="text/javascript">
         var searchInput = 'search_input';
@@ -151,7 +151,7 @@
             autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), {
                 types: ['geocode'],
             });
-            google.maps.event.addListener(autocomplete, 'place_changed', function() {
+            google.maps.event.addListener(autocomplete, 'place_changed', function(){
                 var near_place = autocomplete.getplaces();
             });
         });
@@ -164,9 +164,12 @@
 </html>
 <!--Add code-->
 <?php
+
 include 'database.php';
 
+
 if (isset($_POST['submit'])) {
+
     $location = $_POST['location'];
     $contact = $_POST['contact'];
     $date = $_POST['date'];
@@ -174,29 +177,62 @@ if (isset($_POST['submit'])) {
     $instruction = $_POST['instruction'];
     $status = $_POST['status'];
 
-    // Handle uploaded file
-    $targetDir = "uploads/";
-    $targetFile = $targetDir . basename($_FILES["evidencePicture"]["name"]);
+    $sql = "INSERT INTO reports (location, contact, date, incident_type, instruction, status) values('$location', '$contact','$date','$incident','$instruction','$status')";
 
-    if (move_uploaded_file($_FILES["evidencePicture"]["tmp_name"], $targetFile)) {
-        // Insert data into the database
-        $sql = "INSERT INTO reports (location, contact, date, incident_type, instruction, status, evidence) VALUES ('$location', '$contact', '$date', '$incident', '$instruction', '$status', '$targetFile')";
-
-        if ($conn->query($sql)) {
+  if ($conn->query($sql)) {
 ?>
-            <script>
-                Swal.fire(
-                    'Success',
-                    'Report Submitted!',
-                    'success'
-                )
-            </script>
+    <script>
+      Swal.fire(
+        'Success',
+        'Report Submitted!',
+        'success'
+      )
+    </script>
+
+
 <?php
-        } else {
-            // Handle database insertion failure...
-        }
-    } else {
-        // Handle file upload failure...
-    }
+
+  } else {
+  }
 }
+
+
+?>
+
+
+<?php
+
+include 'database.php';
+
+
+
+if (isset($_POST['submit'])) {
+
+    $location = $_POST['location'];
+    $contact = $_POST['contact'];
+    $date = $_POST['date'];
+    $incident = $_POST['incident'];
+    $instruction = $_POST['instruction'];
+    $status = $_POST['status'];
+
+    $sql = "INSERT INTO records (location, contact, date, incident_type, instruction, status) values('$location', '$contact','$date','$incident','$instruction','$status')";
+
+  if ($conn->query($sql)) {
+?>
+    <script>
+      Swal.fire(
+        'Success',
+        'Report Submitted!',
+        'success'
+      )
+    </script>
+
+
+<?php
+
+  } else {
+  }
+}
+
+
 ?>
