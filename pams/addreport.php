@@ -22,7 +22,7 @@
     <script src="https://kit.fontawesome.com/ae360af17e.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
-    <title>Sidebar</title>
+    <title>Police</title>
 </head>
 <style>
     body {
@@ -530,48 +530,56 @@ if (isset($_POST['update'])) {
 
 <?php
 include 'database.php';
-
-// Check if the Assign Report form is submitted
 if (isset($_POST['assignReport'])) {
     $policeId = $_POST['police_id'];
     $reportId = $_POST['report_id'];
 
-    // Update the assignedpolice column in the report table
-    $assignReportQuery = "UPDATE report SET assignedpolice='$policeId' WHERE id='$reportId'";
-    $assignReportQueryRun = mysqli_query($conn, $assignReportQuery);
+    // Check the current status of the police
+    $policeStatusSql = "SELECT status FROM police WHERE id='" . $policeId . "'";
+    $policeStatusQuery = mysqli_query($conn, $policeStatusSql);
+    $policeStatus = mysqli_fetch_assoc($policeStatusQuery)['status'];
 
-    if ($assignReportQueryRun) {
-        // Update the status column in the police table to 'Assigned'
-        $updatePoliceStatusQuery = "UPDATE police SET status='Assigned' WHERE id='$policeId'";
-        $updatePoliceStatusQueryRun = mysqli_query($conn, $updatePoliceStatusQuery);
-
-        if ($updatePoliceStatusQueryRun) {
-            echo '<script>
-                let timerIntervalsss;
-                Swal.fire({
-                    title: "Assigning Police",
-                    html: "It will close in <b></b> milliseconds.",
-                    timer: 1000,
-                    timerProgressBar: true,
-                    didOpen: () => {
-                        Swal.showLoading();
-                        const b = Swal.getHtmlContainer().querySelector("b");
-                        timerIntervalsss = setInterval(() => {
-                            b.textContent = Swal.getTimerLeft();
-                        }, 100);
-                    },
-                    willClose: () => {
-                        clearInterval(timerIntervalsss);
-                        location.href = "addreport.php";
-                    }
-                });
-            </script>';
-        } else {
-            // Handle error in updating police status
-            echo '<script>alert("Error updating police status");</script>';
-        }
+    // Check if the police status is already 'Assigned'
+    if ($policeStatus == 'Assigned') {
+        echo '<script>alert("This police officer is already assigned.");</script>';
     } else {
-        // Handle error in assigning report
-        echo '<script>alert("Error assigning report");</script>';
+        // Update the assignedpolice column in the report table
+        $assignReportQuery = "UPDATE report SET assignedpolice='$policeId' WHERE id='$reportId'";
+        $assignReportQueryRun = mysqli_query($conn, $assignReportQuery);
+
+        if ($assignReportQueryRun) {
+            // Update the status column in the police table to 'Assigned'
+            $updatePoliceStatusQuery = "UPDATE police SET status='Assigned' WHERE id='$policeId'";
+            $updatePoliceStatusQueryRun = mysqli_query($conn, $updatePoliceStatusQuery);
+
+            if ($updatePoliceStatusQueryRun) {
+                echo '<script>
+                    let timerIntervalsss;
+                    Swal.fire({
+                        title: "Assigning Police",
+                        html: "It will close in <b></b> milliseconds.",
+                        timer: 1000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading();
+                            const b = Swal.getHtmlContainer().querySelector("b");
+                            timerIntervalsss = setInterval(() => {
+                                b.textContent = Swal.getTimerLeft();
+                            }, 100);
+                        },
+                        willClose: () => {
+                            clearInterval(timerIntervalsss);
+                            location.href = "addreport.php";
+                        }
+                    });
+                </script>';
+            } else {
+                // Handle error in updating police status
+                echo '<script>alert("Error updating police status");</script>';
+            }
+        } else {
+            // Handle error in assigning report
+            echo '<script>alert("Error assigning report");</script>';
+        }
     }
 }

@@ -288,8 +288,9 @@
                                     <th scope="col">Contact</th>
                                     <th scope="col">Date</th>
                                     <th scope="col">Incident Type</th>
-                                    <th scope="col">Assigned Police</th>
                                     <th scope="col">Instruction</th>
+                                    <th scope="col">Assigned Police</th>
+
                                     <th scope="col">Action</th>
                                     <th scope="col">Status</th>
                                 </tr>
@@ -314,8 +315,9 @@
                                             <td><?= $report['contact'] ?></td>
                                             <td><?= $report['date'] ?></td>
                                             <td><?= $report['incident_type'] ?></td>
-                                            <td><?= $report['fullname'] ?></td>
                                             <td><?= $report['instruction'] ?></td>
+                                            <td><?= $report['fullname'] ?></td>
+
                                             <td>
                                                 <button type="button" class="btn btn-info show-evidence-btn" data-toggle="modal" data-report-id="<?= $report['id'] ?>" data-evidence="<?= $report['evidence'] ?>">
                                                     <i class="fa-solid fa-eye"></i> See Evidence
@@ -406,7 +408,7 @@
                 $('#date').val(data[3]);
                 $('#incident').val(data[4]);
                 $('#instruction').val(data[5]);
-                $('#evidencePicture').val(data[5]);
+                $('#evidencePicture').val(data[6]);
 
 
             });
