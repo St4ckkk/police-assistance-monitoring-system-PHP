@@ -83,7 +83,8 @@
                 <div class="container-fluid">
                     <div class="mb-3">
                         <div class="container">
-                            <form action="" method="POST">
+                            <form action="" method="POST" enctype="multipart/form-data">
+
 
                                 <br>
 
@@ -93,7 +94,7 @@
 
                                 <label for="contact" class="form-label">Contact</label>
                                 <input type="number" class="form-control" name="contact" id="contact" placeholder="09XX-XXX-XXXX" required>
-
+                                <br>
                                 <label for="date" class="form-label">Date</label>
                                 <input type="date" class="form-control" name="date" id="date" placeholder="" required>
 
@@ -112,12 +113,13 @@
 
                                     </select>
                                 </div>
-
+                                <br>
+                                <label for="evidencePicture" class="form-label">Evidence Picture:</label>
+                                <input type="file" id="evidencePicture" name="evidencePicture" accept="image/*" class="form-control" required>
                                 <label for="callend" class="form-label">Special Instructions</label>
-                                <input type="text" class="form-control" name="instruction" id="instruction" placeholder="Input here" required>
+                                <textarea name="instruction" id="instruction" size="6" class="form-control"></textarea>
 
                                 <input type="hidden" id="myInputField" name="status">
-
                                 <hr>
                                 <input class="btn btn-outline-success" type="submit" name="submit" value="Submit">
 
@@ -132,14 +134,14 @@
         </div>
     </div>
     <script>
-document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function() {
 
-    var inputField = document.getElementById("myInputField");
-    
- 
-    inputField.value = "OnGoing";
-});
-</script>
+            var inputField = document.getElementById("myInputField");
+
+
+            inputField.value = "OnGoing";
+        });
+    </script>
 
     <script type="text/javascript">
         var searchInput = 'search_input';
@@ -149,7 +151,7 @@ document.addEventListener("DOMContentLoaded", function() {
             autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), {
                 types: ['geocode'],
             });
-            google.maps.event.addListener(autocomplete, 'place_changed', function(){
+            google.maps.event.addListener(autocomplete, 'place_changed', function() {
                 var near_place = autocomplete.getplaces();
             });
         });
@@ -162,12 +164,9 @@ document.addEventListener("DOMContentLoaded", function() {
 </html>
 <!--Add code-->
 <?php
-
 include 'database.php';
 
-
 if (isset($_POST['submit'])) {
-
     $location = $_POST['location'];
     $contact = $_POST['contact'];
     $date = $_POST['date'];
@@ -175,98 +174,29 @@ if (isset($_POST['submit'])) {
     $instruction = $_POST['instruction'];
     $status = $_POST['status'];
 
-    $sql = "INSERT INTO reports (location, contact, date, incident_type, instruction, status) values('$location', '$contact','$date','$incident','$instruction','$status')";
+    // Handle uploaded file
+    $targetDir = "uploads/";
+    $targetFile = $targetDir . basename($_FILES["evidencePicture"]["name"]);
 
-  if ($conn->query($sql)) {
+    if (move_uploaded_file($_FILES["evidencePicture"]["tmp_name"], $targetFile)) {
+        // Insert data into the database
+        $sql = "INSERT INTO reports (location, contact, date, incident_type, instruction, status, evidence) VALUES ('$location', '$contact', '$date', '$incident', '$instruction', '$status', '$targetFile')";
+
+        if ($conn->query($sql)) {
 ?>
-    <script>
-      Swal.fire(
-        'Success',
-        'Report Submitted!',
-        'success'
-      )
-    </script>
-
-
+            <script>
+                Swal.fire(
+                    'Success',
+                    'Report Submitted!',
+                    'success'
+                )
+            </script>
 <?php
-
-  } else {
-  }
+        } else {
+            // Handle database insertion failure...
+        }
+    } else {
+        // Handle file upload failure...
+    }
 }
-
-
-?>
-
-<?php
-
-include 'database.php';
-
-
-
-if (isset($_POST['submit'])) {
-
-    $location = $_POST['location'];
-    $contact = $_POST['contact'];
-    $date = $_POST['date'];
-    $incident = $_POST['incident'];
-    $instruction = $_POST['instruction'];
-    $status = $_POST['status'];
-
-    $sql = "INSERT INTO report (location, contact, date, incident_type, instruction, status) values('$location', '$contact','$date','$incident','$instruction','$status')";
-
-  if ($conn->query($sql)) {
-?>
-    <script>
-      Swal.fire(
-        'Success',
-        'Report Submitted!',
-        'success'
-      )
-    </script>
-
-
-<?php
-
-  } else {
-  }
-}
-
-
-?>
-
-<?php
-
-include 'database.php';
-
-
-
-if (isset($_POST['submit'])) {
-
-    $location = $_POST['location'];
-    $contact = $_POST['contact'];
-    $date = $_POST['date'];
-    $incident = $_POST['incident'];
-    $instruction = $_POST['instruction'];
-    $status = $_POST['status'];
-
-    $sql = "INSERT INTO records (location, contact, date, incident_type, instruction, status) values('$location', '$contact','$date','$incident','$instruction','$status')";
-
-  if ($conn->query($sql)) {
-?>
-    <script>
-      Swal.fire(
-        'Success',
-        'Report Submitted!',
-        'success'
-      )
-    </script>
-
-
-<?php
-
-  } else {
-  }
-}
-
-
 ?>
