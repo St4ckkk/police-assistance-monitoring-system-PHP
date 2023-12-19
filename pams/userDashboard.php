@@ -47,7 +47,7 @@
                     <li a class="sidebar-item">
                         <a href="userDashboard.php" class="sidebar-link">
                             <i class="fa-solid fa-right-from-bracket"></i>
-                            Log Out
+                            
                         </a>
                     </li>
                     </li>

@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Admin Signup</title>
+  <title>Admin Login</title>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link rel="stylesheet" href="login.css" type="text/css">
@@ -61,12 +61,12 @@
       </div>
 
       <div class="form__field">
-        <input type="submit" value="Sign Up" name="submit">
+        <input type="submit" value="Sign In" name="submit">
       </div>
 
     </form>
 
-    <p class="text--center">Already have an account? <a href="adminLogin.php">Log-in</a> <svg class="icon">
+    <p class="text--center">Not a member? <a href="signup.php">Sign up now</a> <svg class="icon">
         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="assets/images/icons.svg#arrow-right"></use>
       </svg></p>
 
@@ -85,8 +85,8 @@
   </svg>
 
 </body>
-</html>
 
+</html>
 <?php
 
 include 'database.php';
@@ -96,24 +96,31 @@ if (isset($_POST['submit'])) {
   $username = $_POST['username'];
   $password = $_POST['password'];
 
+  $sql = "SELECT * FROM account WHERE username='$username' AND password='$password'";
 
-  $sql = "INSERT INTO account (username, password) values ('$username','$password')";
+  $result = $conn->query($sql);
 
-  if ($conn->query($sql)) {
+  if ($result->num_rows == 1) {
+    $_SESSION['username'] = $username;
 ?>
     <script>
+      location.href = "dashboard.php"
+    </script>
+  <?php
+  } else {
+  ?>
+    <script>
       Swal.fire({
-        title: "Sign-up Successfully!",
-        text: "You can login now!",
-        icon: "success"
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+        footer: '<a href="#">Why do I have this issue?</a>'
       });
     </script>
 
 
-<?php
 
+<?php
   }
 }
-
-
 ?>

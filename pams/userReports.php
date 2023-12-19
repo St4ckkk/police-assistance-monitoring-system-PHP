@@ -21,9 +21,147 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/ae360af17e.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css" type="text/css">
-    <title>Caller Info</title>
+    <title>Complaint History</title>
 </head>
+<style>
+    *,
+    ::after,
+    ::before {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        
+        background-color: white;
+        color: #333;
+    }
+
+    h3 {
+        font-size: 1.53475rem;
+        color: #3A98B9;
+    }
+
+    a {
+        cursor: pointer;
+        text-decoration: none;
+        font-family: 'Poppins', sans-serif;
+        color: #3A98B9;
+    }
+
+    li {
+
+        list-style: none;
+    }
+
+    /* Layout skeleton */
+
+    .wrapper {
+        align-items: stretch;
+        display: flex;
+        width: 100%;
+    }
+
+    #sidebar {
+        max-width: 264px;
+        min-width: 264px;
+        transition: all 0.35s ease-in-out;
+        box-shadow: 0 0 35px 0 rgba(226, 200, 183, 0.199);
+        z-index: 1111;
+    }
+
+    /* Sidebar collapse */
+
+    #sidebar.collapsed {
+        margin-left: -264px;
+    }
+
+    .main {
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+        min-height: 100vh;
+        width: 100%;
+        overflow: hidden;
+        transition: all 0.35s ease-in-out;
+        color: #333;
+    }
+
+    .sidebar-logo {
+        padding: 1.15rem 1.5rem;
+    }
+
+    .sidebar-logo a {
+        color: #007bff;
+        font-size: 2.25rem;
+        font-weight: 600;
+    }
+
+    .sidebar-nav {
+        padding: 0;
+    }
+
+    .sidebar-header {
+        color: #007bff;
+        font-size: .75rem;
+        padding: 1.5rem 1.5rem .375rem;
+    }
+
+    a.sidebar-link {
+        padding: .625rem 1.625rem;
+        color: #200E3A;
+        position: relative;
+        display: block;
+        font-size: 1rem;
+    }
+
+    .sidebar-link[data-bs-toggle="collapse"]::after {
+        border: solid;
+        border-width: 0 .075rem .075rem 0;
+        content: "";
+        display: inline-block;
+        padding: 2px;
+        position: absolute;
+        right: 1.5rem;
+        top: 1.4rem;
+        transform: rotate(-135deg);
+        transition: all .2s ease-out;
+        color: #200E3A;
+    }
+
+    .sidebar-link[data-bs-toggle="collapse"].collapsed::after {
+        transform: rotate(45deg);
+        transition: all .2s ease-out;
+    }
+
+    .sidebar-nav li i {
+        color: #200E3A;
+    }
+
+    .content {
+        flex: 1;
+        max-width: 100vw;
+        width: 100vw;
+    }
+    label {
+        color: #333;
+    }
+
+    form {
+        color: beige;
+        margin: auto;
+    }
+
+
+    /* Responsive */
+
+    @media (min-width:768px) {
+        .content {
+            width: auto;
+        }
+    }
+</style>
 
 <body>
     <!--Edit modal-->
@@ -34,7 +172,7 @@
                     <h5 class="modal-title" id="exampleModalLabel">Update Data</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body bg-dark">
+                <div class="modal-body bg-white">
                     <form method="POST" enctype="multipart/form-data">
                         <div class="form-group">
                             <input type="hidden" name="id" id="id" class="form-control">
@@ -61,10 +199,9 @@
                         </div>
                         <div class="form-group">
                             <label>Instruction</label>
-                            <textarea name="instruction" id="instruction" size="6" class="form-control"></textarea>
+                            <textarea name="instruction" id="instruction" size="6" class="form-control" style="color: #333;"></textarea>
                         </div>
                         <div class="modal-footer">
-
                             <button type="submit" name="update" class="btn btn-primary">UPDATE</button>
                         </div>
                     </form>
@@ -106,7 +243,7 @@
                         <h3>Police Assistance Monitoring</h3>
                     </li>
                     <li class="sidebar-item">
-                        <a href="userDashboard.php" class="sidebar-link">
+                        <a href="index.php" class="sidebar-link">
                             <i class="fa-solid fa-home"></i>
                             Home
                         </a>
@@ -124,12 +261,6 @@
                                 <a href="userReports.php" class="sidebar-link">Report History</a>
                             </li>
                         </ul>
-                    </li>
-                    <li a class="sidebar-item">
-                        <a href="userDashboard.php" class="sidebar-link">
-                            <i class="fa-solid fa-right-from-bracket"></i>
-                            Log Out
-                        </a>
                     </li>
                     </li>
 
@@ -149,7 +280,7 @@
                 <div class="container-fluid">
                     <div class="mb-3">
 
-                        <table class="table table-dark table-hover" id="myTable">
+                        <table class="table table-white table-hover" id="myTable">
                             <thead>
                                 <tr>
                                     <th scope="col" hidden>ID</th>

@@ -10,9 +10,147 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvmxuy8YpitE31oFtSfRr56h_xwK3OROQ&libraries=places"></script>
     <script src="https://kit.fontawesome.com/ae360af17e.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css" type="text/css">
-    <title>Caller</title>
+
+    <title>File A Complaint</title>
 </head>
+<style>
+    *,
+    ::after,
+    ::before {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        background-color: white;
+        color: #333;
+    }
+
+    h3 {
+        font-size: 1.53475rem;
+        color: #3A98B9;
+    }
+
+    a {
+        cursor: pointer;
+        text-decoration: none;
+        font-family: 'Poppins', sans-serif;
+        color: #3A98B9;
+    }
+
+    li {
+
+        list-style: none;
+    }
+
+    /* Layout skeleton */
+
+    .wrapper {
+        align-items: stretch;
+        display: flex;
+        width: 100%;
+    }
+
+    #sidebar {
+        max-width: 264px;
+        min-width: 264px;
+        transition: all 0.35s ease-in-out;
+        box-shadow: 0 0 35px 0 rgba(226, 200, 183, 0.199);
+        z-index: 1111;
+    }
+
+    /* Sidebar collapse */
+
+    #sidebar.collapsed {
+        margin-left: -264px;
+    }
+
+    .main {
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+        min-height: 100vh;
+        width: 100%;
+        overflow: hidden;
+        transition: all 0.35s ease-in-out;
+        color: #333;
+    }
+
+    .sidebar-logo {
+        padding: 1.15rem 1.5rem;
+    }
+
+    .sidebar-logo a {
+        color: #007bff;
+        font-size: 2.25rem;
+        font-weight: 600;
+    }
+
+    .sidebar-nav {
+        padding: 0;
+    }
+
+    .sidebar-header {
+        color: #007bff;
+        font-size: .75rem;
+        padding: 1.5rem 1.5rem .375rem;
+    }
+
+    a.sidebar-link {
+        padding: .625rem 1.625rem;
+        color: #200E3A;
+        position: relative;
+        display: block;
+        font-size: 1rem;
+    }
+
+    .sidebar-link[data-bs-toggle="collapse"]::after {
+        border: solid;
+        border-width: 0 .075rem .075rem 0;
+        content: "";
+        display: inline-block;
+        padding: 2px;
+        position: absolute;
+        right: 1.5rem;
+        top: 1.4rem;
+        transform: rotate(-135deg);
+        transition: all .2s ease-out;
+        color: #200E3A;
+    }
+
+    .sidebar-link[data-bs-toggle="collapse"].collapsed::after {
+        transform: rotate(45deg);
+        transition: all .2s ease-out;
+    }
+
+    .sidebar-nav li i {
+        color: #200E3A;
+    }
+
+    .content {
+        flex: 1;
+        max-width: 100vw;
+        width: 100vw;
+    }
+    label {
+        color: #333;
+    }
+
+    form {
+        color: beige;
+        margin: auto;
+    }
+
+
+    /* Responsive */
+
+    @media (min-width:768px) {
+        .content {
+            width: auto;
+        }
+    }
+</style>
 
 <body>
     <div class="wrapper">
@@ -28,7 +166,7 @@
                         <h3>Police Assistance Monitoring</h3>
                     </li>
                     <li class="sidebar-item">
-                        <a href="userDashboard.php" class="sidebar-link">
+                        <a href="index.php" class="sidebar-link">
                             <i class="fa-solid fa-home"></i>
                             Home
                         </a>
@@ -47,14 +185,6 @@
                             </li>
                         </ul>
                     </li>
-                    <li a class="sidebar-item">
-                        <a href="userDashboard.php" class="sidebar-link">
-                            <i class="fa-solid fa-right-from-bracket"></i>
-                            Log Out
-                        </a>
-                    </li>
-                    </li>
-
                 </ul>
             </div>
         </aside>
@@ -71,25 +201,26 @@
                 <div class="container-fluid">
                     <div class="mb-3">
                         <div class="container">
-                            <form action="" method="POST" enctype="multipart/form-data">
+                            <form action="" method="POST" enctype="multipart/form-data" class="mt-4">
+                                <div class="mb-3">
+                                    <label for="location" class="form-label">Location</label>
+                                    <input type="text" class="form-control" name="location" id="search_input" placeholder="Location" required>
+                                </div>
 
+                                <div class="mb-3">
+                                    <label for="contact" class="form-label">Contact</label>
+                                    <input type="number" class="form-control" name="contact" id="contact" placeholder="09XX-XXX-XXXX" required>
+                                </div>
 
-                                <br>
+                                <div class="mb-3">
+                                    <label for="date" class="form-label">Date</label>
+                                    <input type="date" class="form-control" name="date" id="date" placeholder="" required>
+                                </div>
 
-
-                                <label for="location" class="form-label">Location</label>
-                                <input type="text" class="form-control" name="location" id="search_input" placeholder="Location" required>
-
-                                <label for="contact" class="form-label">Contact</label>
-                                <input type="number" class="form-control" name="contact" id="contact" placeholder="09XX-XXX-XXXX" required>
-                                <br>
-                                <label for="date" class="form-label">Date</label>
-                                <input type="date" class="form-control" name="date" id="date" placeholder="" required>
-
-                                <div class="form-group">
-                                    <label for="">Incident Type</label>
-                                    <select name="incident" class="form-control" id="">
-                                        <option value="">--Select Incident Type--</option>
+                                <div class="mb-3">
+                                    <label for="incident" class="form-label">Incident Type</label>
+                                    <select name="incident" class="form-control" id="incident" required>
+                                        <option value="">-- Select Incident Type --</option>
                                         <option value="Motorcycle Incident">Motorcycle Incident</option>
                                         <option value="Fire Incident">Fire Incident</option>
                                         <option value="Unsafe Acts">Unsafe Acts</option>
@@ -97,24 +228,25 @@
                                         <option value="Workplace Hazards">Workplace Hazards</option>
                                         <option value="Minor Injury">Minor Injury</option>
                                         <option value="Fatalities">Fatalities</option>
-                                        <option value="Others">--Others--</option>
-
+                                        <option value="Others">-- Others --</option>
                                     </select>
                                 </div>
-                                <br>
-                                <label for="evidencePicture" class="form-label">Evidence Picture:</label>
-                                <input type="file" id="evidencePicture" name="evidencePicture" accept="image/*" class="form-control" required>
-                                <label for="callend" class="form-label">Special Instructions</label>
-                                <textarea name="instruction" id="instruction" size="6" class="form-control"></textarea>
-                                <input type="hidden" id="myInputField" name="status">
+
+                                <div class="mb-3">
+                                    <label for="evidencePicture" class="form-label">Evidence Picture:</label>
+                                    <input type="file" id="evidencePicture" name="evidencePicture" accept="image/*" class="form-control" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="instruction" class="form-label">Special Instructions</label>
+                                    <textarea name="instruction" id="instruction" rows="4" class="form-control"></textarea>
+                                </div>
+
                                 <hr>
-                                <input class="btn btn-outline-success" type="submit" name="submit" value="Submit">
 
-
+                                <input class="btn btn-success w-100" type="submit" name="submit" value="Submit">
                             </form>
                         </div>
-
-
                     </div>
                 </div>
             </main>
