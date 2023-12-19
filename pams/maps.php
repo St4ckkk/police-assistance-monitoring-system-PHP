@@ -232,12 +232,12 @@ if (isset($_GET['location'])) {
                     </li>
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard" aria-expanded="false" aria-controls="dashboard">
-                            <i class="fa-solid fa-book pe-2"></i>
-                            Police Records
+                            <i class="fa-solid fa-shield pe-2"></i>
+                            Police
                         </a>
                         <ul id="dashboard" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
-                                <a href="reports.php" class="sidebar-link">Police</a>
+                                <a href="addreport.php" class="sidebar-link">Police</a>
                             </li>
                         </ul>
                     </li>

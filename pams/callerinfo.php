@@ -22,7 +22,7 @@
     <script src="https://kit.fontawesome.com/ae360af17e.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
-    <title>Caller Info</title>
+    <title>Complaints</title>
 </head>
 <style>
     .container {
@@ -304,6 +304,17 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard" aria-expanded="false" aria-controls="dashboard">
+                            <i class="fa-solid fa-shield pe-2"></i>
+                            Police
+                        </a>
+                        <ul id="dashboard" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                            <li class="sidebar-item">
+                                <a href="addreport.php" class="sidebar-link">Police</a>
+                            </li>
+                        </ul>
+                    </li>
                     <li a class="sidebar-item">
                         <a href="logout.php" class="sidebar-link">
                             <i class="fa-solid fa-right-from-bracket"></i>
@@ -334,12 +345,11 @@
                                     <th scope="col">Location</th>
                                     <th scope="col">Contact</th>
                                     <th scope="col">Date</th>
-                                    <th scope="col">Incident_Type</th>
-                                    <th scope="col">Evidence</th>
+                                    <th scope="col">Incident Type</th>
+                                    <th scope="col">Assigned Police</th>
                                     <th scope="col">Instruction</th>
                                     <th scope="col">Action</th>
                                     <th scope="col">Status</th>
-                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -348,8 +358,9 @@
                                 include 'database.php';
 
 
-
-                                $sql = "SELECT * FROM report";
+                                $sql = "SELECT report.id, report.location, report.contact, report.date, report.incident_type, report.evidence, report.instruction, report.status, police.fullname
+                                FROM report
+                                LEFT JOIN police ON report.assignedpolice = police.id";
                                 $query_run = mysqli_query($conn, $sql);
 
                                 if (mysqli_num_rows($query_run) > 0) {
@@ -361,21 +372,19 @@
                                             <td><?= $report['contact'] ?></td>
                                             <td><?= $report['date'] ?></td>
                                             <td><?= $report['incident_type'] ?></td>
+                                            <td><?= $report['fullname'] ?></td>
+                                            <td><?= $report['instruction'] ?></td>
                                             <td>
                                                 <button type="button" class="btn btn-info show-evidence-btn" data-toggle="modal" data-report-id="<?= $report['id'] ?>" data-evidence="<?= $report['evidence'] ?>">
                                                     <i class="fa-solid fa-eye"></i> See Evidence
                                                 </button>
-                                            </td>
-                                            <td><?= $report['instruction'] ?></td>
-
-                                            <td>
+                                                <button type="button" class="btn btn-primary" onclick="redirectToMap('<?= urlencode($report['location']) ?>')">
+                                                    <i class="fa-solid fa-map-marker"></i> See Map Location
+                                                </button>
                                                 <button type="button" class="btn btn-danger deletebtn" name="deletebtn"><i class="fa-solid fa-trash"></i></button>
                                                 <button type="button" class="btn btn-success up" name="up"><i class='bx bx-check'></i></button>
                                             </td>
                                             <td><?= $report['status'] ?></td>
-                                            <td>
-                                                <a href="maps.php?location=<?= urlencode($report['location']) ?>">See Map Location</a>
-                                            </td>
                                             <div class="modal fade" id="evidenceModal<?= $report['id'] ?>" tabindex="-1" aria-labelledby="evidenceModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content">
@@ -406,6 +415,12 @@
             </main>
         </div>
     </div>
+    <script>
+        function redirectToMap(location) {
+            window.location.href = 'maps.php?location=' + location;
+        }
+    </script>
+
     <script>
         $(document).ready(function() {
             $('#myTable').DataTable();

@@ -33,7 +33,7 @@
     body {
         font-family: 'Poppins', sans-serif;
         margin: 0;
-        
+
         background-color: white;
         color: #333;
     }
@@ -144,6 +144,7 @@
         max-width: 100vw;
         width: 100vw;
     }
+
     label {
         color: #333;
     }
@@ -279,7 +280,6 @@
             <main class="content px-3 py-2">
                 <div class="container-fluid">
                     <div class="mb-3">
-
                         <table class="table table-white table-hover" id="myTable">
                             <thead>
                                 <tr>
@@ -287,10 +287,9 @@
                                     <th scope="col">Location</th>
                                     <th scope="col">Contact</th>
                                     <th scope="col">Date</th>
-                                    <th scope="col">Incident_Type</th>
-                                    <th scope="col">Evidence</th>
+                                    <th scope="col">Incident Type</th>
+                                    <th scope="col">Assigned Police</th>
                                     <th scope="col">Instruction</th>
-
                                     <th scope="col">Action</th>
                                     <th scope="col">Status</th>
                                 </tr>
@@ -301,8 +300,9 @@
                                 include 'database.php';
 
 
-
-                                $sql = "SELECT * FROM report";
+                                $sql = "SELECT report.id, report.location, report.contact, report.date, report.incident_type, report.evidence, report.instruction, report.status, police.fullname
+                                FROM report
+                                LEFT JOIN police ON report.assignedpolice = police.id";
                                 $query_run = mysqli_query($conn, $sql);
 
                                 if (mysqli_num_rows($query_run) > 0) {
@@ -314,16 +314,15 @@
                                             <td><?= $report['contact'] ?></td>
                                             <td><?= $report['date'] ?></td>
                                             <td><?= $report['incident_type'] ?></td>
+                                            <td><?= $report['fullname'] ?></td>
+                                            <td><?= $report['instruction'] ?></td>
                                             <td>
                                                 <button type="button" class="btn btn-info show-evidence-btn" data-toggle="modal" data-report-id="<?= $report['id'] ?>" data-evidence="<?= $report['evidence'] ?>">
                                                     <i class="fa-solid fa-eye"></i> See Evidence
                                                 </button>
-
-                                            </td>
-                                            <td><?= $report['instruction'] ?></td>
-                                            <td>
                                                 <button type="button" class="btn btn-primary editbtn" name="editbtn"><i class="fa-solid fa-pen-to-square"></i></button>
                                                 <button type="button" class="btn btn-danger deletebtn" name="deletebtn"><i class="fa-solid fa-trash"></i></button>
+
                                             </td>
                                             <td><?= $report['status'] ?></td>
                                             <div class="modal fade" id="evidenceModal<?= $report['id'] ?>" tabindex="-1" aria-labelledby="evidenceModalLabel" aria-hidden="true">
@@ -339,6 +338,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+
                                         </tr>
                                 <?php
                                     }
@@ -459,7 +459,7 @@ if (isset($_POST['update'])) {
     if ($_FILES["evidencePicture"]["name"]) {
         if (move_uploaded_file($_FILES["evidencePicture"]["tmp_name"], $targetFile)) {
             // File uploaded successfully
-             $evidence = $targetFile;
+            $evidence = $targetFile;
         } else {
             // Handle file upload failure...
             $uploadOk = 0;
