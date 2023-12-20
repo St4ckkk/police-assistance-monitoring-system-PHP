@@ -5,9 +5,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="icon" href="icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="node_modules/sweetalert2/dist/sweetalert2.min.css" />
+    <link rel="stylesheet" href="node_modules/datatables.net-dt/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="node_modules/datatables.net-bs5/css/dataTables.bootstrap5.min.css" />
+    <link rel="stylesheet" href="node_modules/font-awesome/css/all.min.css" />
+    <link href='node_modules/boxicons/css/boxicons.min.css' rel='stylesheet'>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/datatables.net/js/jquery.dataTables.js"></script>
+    <script src="node_modules/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://kit.fontawesome.com/ae360af17e.js" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <title>Sidebar</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+    <title>Dashboard</title>
 </head>
 <style>
     *,
@@ -172,13 +184,13 @@
                     </li>
                     <li class="sidebar-item">
                         <a href="dashboard.php" class="sidebar-link">
-                            <i class="fa-solid fa-home"></i>
+                            <i class="bx bx-home"></i>
                             Home
                         </a>
                     </li>
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#pages" aria-expanded="false" aria-controls="pages">
-                            <i class="fa-regular fa-file-lines pe-2"></i>
+                            <i class="bx bx-file"></i>
                             Complaint Logs
                         </a>
                         <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
@@ -194,18 +206,18 @@
                     </li>
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard" aria-expanded="false" aria-controls="dashboard">
-                            <i class="fa-solid fa-shield pe-2"></i>
+                            <i class="bx bx-shield"></i>
                             Police
                         </a>
                         <ul id="dashboard" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
-                                <a href="addreport.php" class="sidebar-link">Police</a>
+                                <a href="addreport.php" class="sidebar-link">Police Records</a>
                             </li>
                         </ul>
                     </li>
                     <li a class="sidebar-item">
                         <a href="logout.php" class="sidebar-link">
-                            <i class="fa-solid fa-right-from-bracket"></i>
+                            <i class="bx bx-log-out"></i>
                             Log Out
                         </a>
                     </li>
@@ -289,7 +301,7 @@
 
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
 
 </body>
