@@ -76,6 +76,26 @@
         width: 100%;
     }
 
+    
+
+    .btn-group {
+        margin-right: 10px;
+    }
+
+    .btn-group button {
+        margin-right: 5px;
+        padding: 5px 10px;
+    }
+
+    .btn-group i {
+        margin-right: 5px;
+    }
+
+    .table th,
+    .table td {
+        text-align: center;
+    }
+
     #sidebar {
         max-width: 264px;
         min-width: 264px;
@@ -347,7 +367,7 @@
                                     <th scope="col">Date</th>
                                     <th scope="col">Incident Type</th>
                                     <th scope="col">Assigned Police</th>
-                                    <th scope="col">Instruction</th>
+                                    <th scope="col">Other Details</th>
                                     <th scope="col">Action</th>
                                     <th scope="col">Status</th>
                                 </tr>
@@ -375,15 +395,18 @@
                                             <td><?= $report['fullname'] ?></td>
                                             <td><?= $report['instruction'] ?></td>
                                             <td>
-                                                <button type="button" class="btn btn-info show-evidence-btn" data-toggle="modal" data-report-id="<?= $report['id'] ?>" data-evidence="<?= $report['evidence'] ?>">
-                                                    <i class="fa-solid fa-eye"></i> See Evidence
-                                                </button>
-                                                <button type="button" class="btn btn-primary" onclick="redirectToMap('<?= urlencode($report['location']) ?>')">
-                                                    <i class="fa-solid fa-map-marker"></i> See Map Location
-                                                </button>
-                                                <button type="button" class="btn btn-danger deletebtn" name="deletebtn"><i class="fa-solid fa-trash"></i></button>
-                                                <button type="button" class="btn btn-success up" name="up"><i class='bx bx-check'></i></button>
+                                                <div class="d-flex justify-content-center align-items-center">
+                                                    <button type="button" class="btn btn-info show-evidence-btn" data-toggle="modal" data-report-id="<?= $report['id'] ?>" data-evidence="<?= $report['evidence'] ?>">
+                                                        <i class="fa-solid fa-eye"></i> See Evidence
+                                                    </button>
+                                                    <button type="button" class="btn btn-primary mx-2" onclick="redirectToMap('<?= urlencode($report['location']) ?>')">
+                                                        <i class="fa-solid fa-map-marker"></i> See Map Location
+                                                    </button>
+                                                    <button type="button" class="btn btn-danger deletebtn mx-2" name="deletebtn"><i class="fa-solid fa-trash"></i></button>
+                                                    <button type="button" class="btn btn-success up mx-2" name="up"><i class='bx bx-check'></i></button>
+                                                </div>
                                             </td>
+
                                             <td><?= $report['status'] ?></td>
                                             <div class="modal fade" id="evidenceModal<?= $report['id'] ?>" tabindex="-1" aria-labelledby="evidenceModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered">

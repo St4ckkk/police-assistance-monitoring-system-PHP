@@ -361,6 +361,7 @@
                                     <th scope="col">Contact</th>
                                     <th scope="col">Date</th>
                                     <th scope="col">Incident Type</th>
+                                    <th scope="col">Other Details</th>
                                     <th scope="col">Evidence</th>
                                 </tr>
                             </thead>
@@ -383,6 +384,7 @@
                                             <td><?= $report['contact'] ?></td>
                                             <td><?= $report['date'] ?></td>
                                             <td><?= $report['incident_type'] ?></td>
+                                            <td><?= $report['instruction']?></td>
                                             <td>
                                                 <img src="<?= $report['evidence'] ?>" alt="" style="max-width: 300px; max-height: 300px;" class="img-fluid">
                                             </td>

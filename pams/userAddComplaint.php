@@ -222,6 +222,7 @@
                                     <label for="incident" class="form-label">Incident Type</label>
                                     <select name="incident" class="form-control" id="incident" required>
                                         <option value="">-- Select Incident Type --</option>
+                                        <option value="Theft">Theft</option>
                                         <option value="Motorcycle Incident">Motorcycle Incident</option>
                                         <option value="Fire Incident">Fire Incident</option>
                                         <option value="Unsafe Acts">Unsafe Acts</option>
@@ -229,6 +230,38 @@
                                         <option value="Workplace Hazards">Workplace Hazards</option>
                                         <option value="Minor Injury">Minor Injury</option>
                                         <option value="Fatalities">Fatalities</option>
+                                        <option value="Assault">Assault</option>
+                                        <option value="Vandalism">Vandalism</option>
+                                        <option value="Burglary">Burglary</option>
+                                        <option value="Domestic Violence">Domestic Violence</option>
+                                        <option value="Robbery">Robbery</option>
+                                        <option value="Car Accident">Car Accident</option>
+                                        <option value="Natural Disaster">Natural Disaster</option>
+                                        <option value="Harassment">Harassment</option>
+                                        <option value="Kidnapping">Kidnapping</option>
+                                        <option value="Sexual Assault">Sexual Assault</option>
+                                        <option value="Cybercrime">Cybercrime</option>
+                                        <option value="Hate Crime">Hate Crime</option>
+                                        <option value="Forgery">Forgery</option>
+                                        <option value="Embezzlement">Embezzlement</option>
+                                        <option value="Fraud">Fraud</option>
+                                        <option value="Identity Theft">Identity Theft</option>
+                                        <option value="Stalking">Stalking</option>
+                                        <option value="Trespassing">Trespassing</option>
+                                        <option value="Disorderly Conduct">Disorderly Conduct</option>
+                                        <option value="Public Intoxication">Public Intoxication</option>
+                                        <option value="Arson">Arson</option>
+                                        <option value="Kidnapping">Kidnapping</option>
+                                        <option value="Extortion">Extortion</option>
+                                        <option value="White Collar Crime">White Collar Crime</option>
+                                        <option value="Terrorism">Terrorism</option>
+                                        <option value="Corruption">Corruption</option>
+                                        <option value="Bribery">Bribery</option>
+                                        <option value="Animal Cruelty">Animal Cruelty</option>
+                                        <option value="Environmental Violation">Environmental Violation</option>
+                                        <option value="Human Trafficking">Human Trafficking</option>
+                                        <option value="Forgery">Forgery</option>
+                                        <option value="Other Crime">Other Crime</option>
                                         <option value="Others">-- Others --</option>
                                     </select>
                                 </div>
@@ -241,8 +274,8 @@
                                 <div class="mb-3">
                                     <input type="hidden" name="status" value="OnGoing">
                                     <input type="hidden" name="assignedpolice" value="None">
-                                    <label for="instruction" class="form-label">Special Instructions</label>
-                                    <textarea name="instruction" id="instruction" rows="4" class="form-control"></textarea>
+                                    <label for="incidentDetails" class="form-label">Provide Specific Incident Details</label>
+                                    <textarea name="instruction" id="incidentDetails" rows="4" class="form-control"></textarea>
                                 </div>
 
                                 <hr>

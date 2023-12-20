@@ -288,7 +288,7 @@
                                     <th scope="col">Contact</th>
                                     <th scope="col">Date</th>
                                     <th scope="col">Incident Type</th>
-                                    <th scope="col">Instruction</th>
+                                    <th scope="col">Other Details</th>
                                     <th scope="col">Assigned Police</th>
                                     <th scope="col">Status</th>
                                 </tr>
