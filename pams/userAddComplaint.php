@@ -133,6 +133,7 @@
         max-width: 100vw;
         width: 100vw;
     }
+
     label {
         color: #333;
     }
@@ -238,6 +239,8 @@
                                 </div>
 
                                 <div class="mb-3">
+                                    <input type="hidden" name="status" value="OnGoing">
+                                    <input type="hidden" name="assignedpolice" value="None">
                                     <label for="instruction" class="form-label">Special Instructions</label>
                                     <textarea name="instruction" id="instruction" rows="4" class="form-control"></textarea>
                                 </div>
@@ -292,6 +295,7 @@ if (isset($_POST['submit'])) {
     $incident = $_POST['incident'];
     $instruction = $_POST['instruction'];
     $status = $_POST['status'];
+    $assignedpolice = $_POST['assignedpolice'];
 
     // Handle uploaded file
     $targetDir = "uploads/";
@@ -299,7 +303,7 @@ if (isset($_POST['submit'])) {
 
     if (move_uploaded_file($_FILES["evidencePicture"]["tmp_name"], $targetFile)) {
         // Insert data into the report table
-        $sqlReport = "INSERT INTO report (location, contact, date, incident_type, instruction, status, evidence) VALUES ('$location', '$contact', '$date', '$incident', '$instruction', '$status', '$targetFile')";
+        $sqlReport = "INSERT INTO report (location, contact, date, incident_type, instruction, status, evidence, assignedpolice) VALUES ('$location', '$contact', '$date', '$incident', '$instruction', '$status', '$targetFile', '$assignedpolice')";
         if ($conn->query($sqlReport)) {
 ?>
             <script>

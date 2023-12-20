@@ -712,7 +712,6 @@ if (isset($_POST['update'])) {
 include 'database.php';
 
 if (isset($_POST['done'])) {
-
     $id = $_POST['delete_ids'];
     $status = $_POST['status'];
 
@@ -720,38 +719,58 @@ if (isset($_POST['done'])) {
     $query_run = mysqli_query($conn, $query);
 
     if ($query_run) {
+        $updatePoliceStatusQuery = "UPDATE police SET status='Not Assign' WHERE id IN (SELECT assignedpolice FROM report WHERE id='$id')";
+        $updatePoliceStatusQuery_run = mysqli_query($conn, $updatePoliceStatusQuery);
+
+        if ($updatePoliceStatusQuery_run) {
+            $fetchReportQuery = "SELECT * FROM report WHERE id='$id'";
+            $fetchReportResult = mysqli_query($conn, $fetchReportQuery);
+
+            if ($fetchReportResult) {
+                $reportData = mysqli_fetch_assoc($fetchReportResult);
+
+                $insertRecordsQuery = "INSERT INTO records (location, contact, date, incident_type, instruction, status, evidence) VALUES 
+                                    ('" . $reportData['location'] . "', '" . $reportData['contact'] . "', '" . $reportData['date'] . "', '" . $reportData['incident_type'] . "', '" . $reportData['instruction'] . "', '$status', '" . $reportData['evidence'] . "')";
+
+                $insertRecordsQuery_run = mysqli_query($conn, $insertRecordsQuery);
+
+                if ($insertRecordsQuery_run) {
 ?>
-        <script>
-            let timerIntervalsss
-            Swal.fire({
-                title: 'Updating Status',
-                html: 'I will close in <b></b> milliseconds.',
-                timer: 1000,
-                timerProgressBar: true,
-                didOpen: () => {
-                    Swal.showLoading()
-                    const b = Swal.getHtmlContainer().querySelector('b')
-                    timerIntervalsss = setInterval(() => {
-                        b.textContent = Swal.getTimerLeft()
-                    }, 100)
-                },
-                willClose: () => {
-                    clearInterval(timerIntervalss)
-                }
-            }).then((result) => {
-                /* Read more about handling dismissals below */
-                if (result.dismiss === Swal.DismissReason.timer) {
-                    location.href = "callerinfo.php"
-                }
-            })
-        </script>
-
-
-
+                    <script>
+                        let timerIntervalsss
+                        Swal.fire({
+                            title: 'Updating Status',
+                            html: 'I will close in <b></b> milliseconds.',
+                            timer: 1000,
+                            timerProgressBar: true,
+                            didOpen: () => {
+                                Swal.showLoading()
+                                const b = Swal.getHtmlContainer().querySelector('b')
+                                timerIntervalsss = setInterval(() => {
+                                    b.textContent = Swal.getTimerLeft()
+                                }, 100)
+                            },
+                            willClose: () => {
+                                clearInterval(timerIntervalsss)
+                            }
+                        }).then((result) => {
+                            if (result.dismiss === Swal.DismissReason.timer) {
+                                location.href = "callerinfo.php"
+                            }
+                        })
+                    </script>
 <?php
-
+                } else {
+                    // Handle the error if inserting into records fails
+                }
+            } else {
+                // Handle the error if fetching report data fails
+            }
+        } else {
+            // Handle the error if updating police status fails
+        }
     } else {
+        // Handle the error if updating report status fails
     }
 }
-
 ?>

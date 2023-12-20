@@ -231,7 +231,7 @@
                                 <?php
                                 include 'database.php';
 
-                                $dash_category_query = "SELECT * FROM reports";
+                                $dash_category_query = "SELECT * FROM report";
                                 $dash_category_query_run = mysqli_query($conn, $dash_category_query);
                                 if ($category_total = mysqli_num_rows($dash_category_query_run)) {
                                     echo '<h4 class="mb-0"> ' . $category_total . ' </h4>';
@@ -245,7 +245,7 @@
                                 <?php
                                 include 'database.php';
 
-                                $dash_category_query = "SELECT * FROM reports WHERE status='OnGoing' ";
+                                $dash_category_query = "SELECT * FROM report WHERE status='OnGoing' ";
                                 $dash_category_query_run = mysqli_query($conn, $dash_category_query);
                                 if ($category_total = mysqli_num_rows($dash_category_query_run)) {
                                     echo '<h4 class="mb-0"> ' . $category_total . ' </h4>';
@@ -259,7 +259,7 @@
                                 <?php
                                 include 'database.php';
 
-                                $dash_category_query = "SELECT * FROM reports WHERE status='Done' ";
+                                $dash_category_query = "SELECT * FROM report WHERE status='Done' ";
                                 $dash_category_query_run = mysqli_query($conn, $dash_category_query);
                                 if ($category_total = mysqli_num_rows($dash_category_query_run)) {
                                     echo '<h4 class="mb-0"> ' . $category_total . ' </h4>';
