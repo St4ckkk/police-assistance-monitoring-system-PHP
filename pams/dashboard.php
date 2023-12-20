@@ -225,8 +225,8 @@
             <main class="content px-3 py-2">
                 <div class="container-fluid">
                     <div class="mb-3">
-                        <div class="container-fluid d-flex justify-content-center">
-                            <div class="card col-md-3 m-5">
+                        <div class="container-fluid row justify-content-around">
+                            <div class="card col-md-3 my-3">
                                 <h5>All Reports:</h5>
                                 <?php
                                 include 'database.php';
@@ -240,7 +240,21 @@
                                 }
                                 ?>
                             </div>
-                            <div class="status card col-md-3 m-5">
+                            <div class="card col-md-3 my-3">
+                                <h5>Police:</h5>
+                                <?php
+                                include 'database.php';
+
+                                $dash_category_query = "SELECT * FROM police";
+                                $dash_category_query_run = mysqli_query($conn, $dash_category_query);
+                                if ($category_total = mysqli_num_rows($dash_category_query_run)) {
+                                    echo '<h4 class="mb-0"> ' . $category_total . ' </h4>';
+                                } else {
+                                    echo '<h4 class="mb-0">0</h4>';
+                                }
+                                ?>
+                            </div>
+                            <div class="status card col-md-3 my-3">
                                 <h5>Ongoing Reports:</h5>
                                 <?php
                                 include 'database.php';
@@ -254,7 +268,7 @@
                                 }
                                 ?>
                             </div>
-                            <div class="card col-md-3 m-5">
+                            <div class="card col-md-3 my-3">
                                 <h5>Completed Reports:</h5>
                                 <?php
                                 include 'database.php';
@@ -269,11 +283,10 @@
                                 ?>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
             </main>
+
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
