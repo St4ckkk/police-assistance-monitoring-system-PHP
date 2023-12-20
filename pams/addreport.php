@@ -278,6 +278,19 @@
                                     <label>Badge Number</label>
                                     <input type="text" name="policebadge" id="policebadge" class="form-control">
                                 </div>
+                                <div class="form-group">
+                                    <label>Specialty</label>
+                                    <select class="form-select" name="specialty" id="specialty" required>
+                                        <option value="">-- Select Police Specialty --</option>
+                                        <option value="Traffic Management">Traffic Management</option>
+                                        <option value="Drug Enforcement">Drug Enforcement</option>
+                                        <option value="Criminal Investigation">Criminal Investigation</option>
+                                        <option value="Community Relations">Community Relations</option>
+                                        <option value="Special Weapons and Tactics (SWAT)">Special Weapons and Tactics (SWAT)</option>
+                                        <option value="K9 Unit">K9 Unit</option>
+                                        <!-- Add more options as needed -->
+                                    </select>
+                                </div>
                                 <div class="modal-footer">
                                     <button type="submit" name="update" class="btn btn-primary">UPDATE</button>
                                 </div>
@@ -313,6 +326,21 @@
                                 <br>
                                 <div class="row g-2">
                                     <div class="col">
+                                        <select class="form-select" name="specialty" id="specialty" required>
+                                            <option value="">-- Select Police Specialty --</option>
+                                            <option value="Traffic Management">Traffic Management</option>
+                                            <option value="Drug Enforcement">Drug Enforcement</option>
+                                            <option value="Criminal Investigation">Criminal Investigation</option>
+                                            <option value="Community Relations">Community Relations</option>
+                                            <option value="Special Weapons and Tactics (SWAT)">Special Weapons and Tactics (SWAT)</option>
+                                            <option value="K9 Unit">K9 Unit</option>
+                                            <!-- Add more options as needed -->
+                                        </select>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row g-2">
+                                    <div class="col">
                                         <input class="btn btn-success w-100" type="submit" name="addPolice" value="Add Police">
                                     </div>
                                 </div>
@@ -326,6 +354,7 @@
                                             <th scope="col">Contact Number</th>
                                             <th scope="col">Rank</th>
                                             <th scope="col">Badge Number</th>
+                                            <th scope="col">Specialty</th>
                                             <th scope="col">Assign Report</th>
                                             <th scope="col">Action</th>
                                         </tr>
@@ -349,7 +378,8 @@
                                                     <td><?= $report['fullname'] ?></td>
                                                     <td><?= $report['contact'] ?></td>
                                                     <td><?= $report['rank'] ?></td>
-                                                    <td><?= $report['policebadge'] ?></td>
+                                                    <td><?= $report['policebadge'] ?></td>  
+                                                    <td><?= $report['specialty']?></td>
                                                     <td>
                                                         <form action="" method="POST">
                                                             <input type="hidden" name="police_id" value="<?= $report['id'] ?>">
@@ -511,15 +541,13 @@ if (isset($_POST['deletedata'])) {
 include 'database.php';
 
 if (isset($_POST['addPolice'])) {
-
-    $id = $_POST['id'];
     $fullname = $_POST['fullname'];
     $contact = $_POST['contact'];
     $rank = $_POST['rank'];
     $policebadge = $_POST['policebadge'];
+    $specialty = $_POST['specialty']; // Added line for specialty
 
-
-    $query = "INSERT INTO police (fullname, contact, rank, policebadge) VALUES ('$fullname', '$contact', '$rank', '$policebadge')";
+    $query = "INSERT INTO police (fullname, contact, rank, policebadge, specialty) VALUES ('$fullname', '$contact', '$rank', '$policebadge', '$specialty')";
     $query_run = mysqli_query($conn, $query);
 
     if ($query_run) {
@@ -540,38 +568,31 @@ if (isset($_POST['addPolice'])) {
                 },
                 willClose: () => {
                     clearInterval(timerIntervalss)
+                    location.href = "addreport.php";
                 }
-            }).then((result) => {
-                /* Read more about handling dismissals below */
-                if (result.dismiss === Swal.DismissReason.timer) {
-                    location.href = "addreport.php"
-                }
-            })
+            });
         </script>
-
-
-
 <?php
-
     } else {
+        // Handle the case where the query fails
+        echo '<script>alert("Error adding police");</script>';
     }
 }
-
 ?>
+
 <?php
 include 'database.php';
 
 if (isset($_POST['update'])) {
-
     $id = $_POST['id'];
     $fullname = $_POST['fullname'];
     $contact = $_POST['contact'];
     $rank = $_POST['rank'];
     $policebadge = $_POST['policebadge'];
-
+    $specialty = $_POST['specialty']; // Added line for specialty
 
     $query = "UPDATE police 
-              SET fullname='$fullname', contact='$contact', rank='$rank', policebadge='$policebadge' 
+              SET fullname='$fullname', contact='$contact', rank='$rank', policebadge='$policebadge', specialty='$specialty' 
               WHERE id='$id'";
     $query_run = mysqli_query($conn, $query);
 
@@ -593,24 +614,18 @@ if (isset($_POST['update'])) {
                 },
                 willClose: () => {
                     clearInterval(timerIntervalsss)
+                    location.href = "addreport.php";
                 }
-            }).then((result) => {
-                /* Read more about handling dismissals below */
-                if (result.dismiss === Swal.DismissReason.timer) {
-                    location.href = "addreport.php"
-                }
-            })
+            });
         </script>
-
-
-
 <?php
-
     } else {
+        // Handle the case where the query fails
+        echo '<script>alert("Error updating police data");</script>';
     }
 }
-
 ?>
+
 
 <?php
 include 'database.php';
