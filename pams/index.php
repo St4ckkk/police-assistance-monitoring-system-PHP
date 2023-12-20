@@ -9,16 +9,47 @@
 
     <!-- Bootstrap CSS -->
     <link rel="icon" href="icon.ico" type="image/x-icon">
+    <link rel="icon" href="icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="node_modules/sweetalert2/dist/sweetalert2.min.css" />
+    <link rel="stylesheet" href="node_modules/datatables.net-dt/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="node_modules/datatables.net-bs5/css/dataTables.bootstrap5.min.css" />
+    <link rel="stylesheet" href="node_modules/font-awesome/css/all.min.css" />
+    <link href='node_modules/boxicons/css/boxicons.min.css' rel='stylesheet'>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/datatables.net/js/jquery.dataTables.js"></script>
+    <script src="node_modules/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://kit.fontawesome.com/ae360af17e.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 
     <!-- Custom CSS -->
     <style>
         body {
+            position: relative;
             margin: 0;
             padding: 0;
             font-family: 'Arial', sans-serif;
             color: #343a40;
+            background-image: url('tupi-mps.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
         }
+
+        body::before {
+            content: "";
+            background: rgba(0, 0, 0, 0.5);
+            /* Adjust the last value for the darkness level */
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+
 
         nav {
             background-color: #007bff;
@@ -29,10 +60,6 @@
             color: #fff;
             text-decoration: none;
             margin: 0 15px;
-        }
-
-        .container {
-            margin-top: 50px;
         }
 
         h1 {
@@ -58,8 +85,13 @@
             border-color: #0056b3;
         }
 
+        .container {
+            margin-top: 10px;
+        }
+
         table {
             width: 100%;
+            max-width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
             color: #343a40;
@@ -67,7 +99,7 @@
 
         th,
         td {
-            padding: 12px;
+            padding: 10px;
             text-align: left;
             border-bottom: 1px solid #ddd;
         }
@@ -77,8 +109,15 @@
             color: #fff;
         }
 
-        td {
-            background-color: #fff;
+        .table-transparent {
+            background-color: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            /* Set text color to white */
+        }
+
+        .table-transparent th {
+            background-color: #007bff;
+            color: #fff;
         }
     </style>
 
@@ -98,10 +137,10 @@
     <!-- Main Content Container -->
     <div class="container text-center">
         <!-- Main Heading -->
-        <h1 class="mb-4 mt-5">Welcome to the Police Assistance Monitoring System</h1>
+        <h1 class="mb-4 mt-5">Welcome to Tupi Police Assistance Monitoring System</h1>
 
         <!-- Subheading -->
-        <p class="lead mb-4">Empowering communities through real-time incident reporting and monitoring.</p>
+        <p class="lead mb-4 text-white">Empowering communities through real-time incident reporting and monitoring.</p>
 
         <!-- Call-to-action Button -->
         <a href="userAddComplaint.php" class="btn btn-primary btn-lg">Report Incident</a>
@@ -110,10 +149,10 @@
     <!-- Emergency Contact Information Container -->
     <div class="container">
         <!-- Emergency Contact Information Heading -->
-        <h2>Emergency Contact Information</h2>
+        <h2 class="text-white">Emergency Contact Information</h2>
 
         <!-- Emergency Contact Information Table for South Cotabato -->
-        <table class="table">
+        <table class="table-hover table-striped table-condensed table-bordered table-transparent ">
             <thead>
                 <tr>
                     <th>AGENCY</th>
@@ -146,10 +185,10 @@
                 </tr>
                 <!-- Bureau of Fire Protection (NCR) -->
                 <tr>
-                    <td>Bureau of Fire Protection (NCR)</td>
-                    <td>(02) 729-5166, (02) 410-6254, (02) 431-8859, (02) 407-1230</td>
+                    <td>Tupi Bureau of Fire Protection</td>
+                    <td>(083) 226-1251 (Landline) 0921-490-6628(Smart)</td>
                     <td>-</td>
-                    <td>NCR</td>
+                    <td>National Highway, Tupi</td>
                 </tr>
                 <!-- PAGASA -->
                 <tr>
@@ -165,13 +204,6 @@
                     <td>-</td>
                     <td>Nationwide</td>
                 </tr>
-                <!-- MMDA -->
-                <tr>
-                    <td>Metro Manila Development Authority (MMDA) Metrobase</td>
-                    <td>136</td>
-                    <td>-</td>
-                    <td>NCR</td>
-                </tr>
                 <!-- DPWH -->
                 <tr>
                     <td>Department of Public Works and Highways (DPWH)</td>
@@ -186,12 +218,24 @@
                     <td>-</td>
                     <td>Nationwide</td>
                 </tr>
+                <tr>
+                    <td>New Police Station, Tupi, South Cotabato</td>
+                    <td>0909 828 1201</td>
+                    <td>-</td>
+                    <td>Tupi, South Cotabato</td>
+                </tr>
                 <!-- Add more rows as needed -->
             </tbody>
         </table>
     </div>
 
+    <link rel="stylesheet" href="node_modules/sweetalert/dist/sweetalert.css" />
+    <link rel="stylesheet" href="node_modules/font-awesome/css/all.min.css" />
 
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
