@@ -21,7 +21,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/ae360af17e.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <title>Caller Info</title>
+    <title>Complaints Records</title>
 </head>
 <style>
     .container {
@@ -174,6 +174,47 @@
         text-align: center;
     }
 
+    /* Modal Styles with Transitions */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        padding-top: 50px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.9);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .modal-content {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+        max-height: 80vh;
+    }
+
+    .close {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    /* Fade-in transition */
+    .modal.fade-in {
+        display: block;
+        opacity: 1;
+    }
+
 
     /* Responsive */
 
@@ -307,7 +348,7 @@
                 <button class="btn" type="button" data-bs-theme="dark">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <h1>Reports</h1>
+                <h1>Records</h1>
             </nav>
             <main class="content px-3 py-2">
                 <div class="container-fluid">
@@ -315,12 +356,12 @@
                         <table class="table table-white table-hover" id="myTable">
                             <thead>
                                 <tr>
-                                    <th scope="col">ID</th>
+                                    <th scope="col" hidden>ID</th>
                                     <th scope="col">Location</th>
                                     <th scope="col">Contact</th>
                                     <th scope="col">Date</th>
                                     <th scope="col">Incident Type</th>
-
+                                    <th scope="col">Evidence</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -337,11 +378,20 @@
                                     foreach ($query_run as $report) {
                                 ?>
                                         <tr>
-                                            <td><?= $report['id'] ?></td>
+                                            <td hidden><?= $report['id'] ?></td>
                                             <td><?= $report['location'] ?></td>
                                             <td><?= $report['contact'] ?></td>
                                             <td><?= $report['date'] ?></td>
                                             <td><?= $report['incident_type'] ?></td>
+                                            <td>
+                                                <img src="<?= $report['evidence'] ?>" alt="" style="max-width: 300px; max-height: 300px;" class="img-fluid">
+                                            </td>
+                                            <!-- Image Modal -->
+                                            <div id="imageModal" class="modal">
+                                                <span class="close">&times;</span>
+                                                <img class="modal-content" id="imgModal">
+                                            </div>
+
 
                                         </tr>
                                 <?php
@@ -362,6 +412,44 @@
     <script>
         $(document).ready(function() {
             $('#mytable').DataTable();
+        });
+
+        var modal = document.getElementById("imageModal");
+        var img = document.getElementById("imgModal");
+        var span = document.getElementsByClassName("close")[0];
+
+     
+        function openModal(src) {
+            modal.style.display = "block";
+            img.src = src;
+            setTimeout(() => {
+                modal.classList.add("fade-in");
+            }, 30); 
+        }
+
+
+        span.onclick = function() {
+            modal.classList.remove("fade-in");
+            setTimeout(() => {
+                modal.style.display = "none";
+            }, 300);
+        };
+
+        // Close the modal if the user clicks outside the modal content
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.classList.remove("fade-in");
+                setTimeout(() => {
+                    modal.style.display = "none";
+                }, 300); 
+            }
+        };
+
+        $(document).ready(function() {
+            $('#myTable img').on('click', function() {
+                var src = $(this).attr('src');
+                openModal(src);
+            });
         });
     </script>
     <script>
