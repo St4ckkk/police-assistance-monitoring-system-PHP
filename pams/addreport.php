@@ -231,6 +231,25 @@
                 </button>
                 <h1>Add Police</h1>
             </nav>
+            <!--Delete modal-->
+            <div class="modal fade" id="deletemodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog  modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <form method="POST">
+                                <div class="form-group">
+                                    <input type="hidden" name="delete_id" id="delete_id" class="form-control">
+
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" name="deletedata" class="btn btn-primary">Delete data</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
             <div class="modal fade" id="editmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -420,9 +439,74 @@
             $('#policebadge').val(data[4]);
         });
     });
+    $(document).ready(function() {
+        $('.deletebtn').on('click', function() {
+
+            $('#deletemodal').modal('show');
+
+            $tr = $(this).closest('tr');
+
+            var data = $tr.children("td").map(function() {
+                return $(this).text();
+            }).get();
+
+            console.log(data);
+
+            $('#delete_id').val(data[0]);
+
+
+
+        });
+    });
 </script>
 
 </html>
+<?php
+include 'database.php';
+
+if (isset($_POST['deletedata'])) {
+
+    $id = $_POST['delete_id'];
+
+    $query = "DELETE FROM police WHERE id='$id'";
+    $query_run = mysqli_query($conn, $query);
+
+    if ($query_run) {
+?>
+        <script>
+            let timerIntervals
+            Swal.fire({
+                title: 'Deleting Data',
+                html: 'I will close in <b></b> milliseconds.',
+                timer: 500,
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading()
+                    const b = Swal.getHtmlContainer().querySelector('b')
+                    timerIntervals = setInterval(() => {
+                        b.textContent = Swal.getTimerLeft()
+                    }, 100)
+                },
+                willClose: () => {
+                    clearInterval(timerIntervals)
+                }
+            }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    location.href = "addreport.php"
+                }
+            })
+        </script>
+
+
+
+<?php
+
+    }
+}
+
+?>
+
 <?php
 include 'database.php';
 
@@ -445,7 +529,7 @@ if (isset($_POST['addPolice'])) {
             Swal.fire({
                 title: 'Adding Police',
                 html: 'It will close in <b></b> milliseconds.',
-                timer: 1000,
+                timer: 500,
                 timerProgressBar: true,
                 didOpen: () => {
                     Swal.showLoading()
@@ -494,21 +578,21 @@ if (isset($_POST['update'])) {
     if ($query_run) {
 ?>
         <script>
-            let timerIntervals
+            let timerIntervalsss
             Swal.fire({
                 title: 'Updating Data',
                 html: 'It will close in <b></b> milliseconds.',
-                timer: 1000,
+                timer: 500,
                 timerProgressBar: true,
                 didOpen: () => {
                     Swal.showLoading()
                     const b = Swal.getHtmlContainer().querySelector('b')
-                    timerIntervals = setInterval(() => {
+                    timerIntervalsss = setInterval(() => {
                         b.textContent = Swal.getTimerLeft()
                     }, 100)
                 },
                 willClose: () => {
-                    clearInterval(timerIntervals)
+                    clearInterval(timerIntervalsss)
                 }
             }).then((result) => {
                 /* Read more about handling dismissals below */
@@ -558,7 +642,7 @@ if (isset($_POST['assignReport'])) {
                     Swal.fire({
                         title: "Assigning Police",
                         html: "It will close in <b></b> milliseconds.",
-                        timer: 1000,
+                        timer: 500,
                         timerProgressBar: true,
                         didOpen: () => {
                             Swal.showLoading();
@@ -583,3 +667,4 @@ if (isset($_POST['assignReport'])) {
         }
     }
 }
+?>

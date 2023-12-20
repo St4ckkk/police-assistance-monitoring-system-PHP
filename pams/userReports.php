@@ -290,8 +290,6 @@
                                     <th scope="col">Incident Type</th>
                                     <th scope="col">Instruction</th>
                                     <th scope="col">Assigned Police</th>
-
-                                    <th scope="col">Action</th>
                                     <th scope="col">Status</th>
                                 </tr>
                             </thead>
@@ -317,29 +315,7 @@
                                             <td><?= $report['incident_type'] ?></td>
                                             <td><?= $report['instruction'] ?></td>
                                             <td><?= $report['fullname'] ?></td>
-
-                                            <td>
-                                                <button type="button" class="btn btn-info show-evidence-btn" data-toggle="modal" data-report-id="<?= $report['id'] ?>" data-evidence="<?= $report['evidence'] ?>">
-                                                    <i class="fa-solid fa-eye"></i> See Evidence
-                                                </button>
-                                                <button type="button" class="btn btn-primary editbtn" name="editbtn"><i class="fa-solid fa-pen-to-square"></i></button>
-                                                <button type="button" class="btn btn-danger deletebtn" name="deletebtn"><i class="fa-solid fa-trash"></i></button>
-
-                                            </td>
                                             <td><?= $report['status'] ?></td>
-                                            <div class="modal fade" id="evidenceModal<?= $report['id'] ?>" tabindex="-1" aria-labelledby="evidenceModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="evidenceModalLabel">Evidence</h5>
-                                                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <img id="evidenceImage<?= $report['id'] ?>" class="img-fluid" alt="Evidence">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
 
                                         </tr>
                                 <?php
