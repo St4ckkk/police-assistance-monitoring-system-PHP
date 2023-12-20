@@ -359,14 +359,13 @@
                                                             $policeStatusQuery = mysqli_query($conn, $policeStatusSql);
                                                             $policeStatus = mysqli_fetch_assoc($policeStatusQuery)['status'];
 
-                                                            // Fetch available reports from the database
-                                                            $reportSql = "SELECT id, incident_type FROM report";
-                                                            $reportQuery = mysqli_query($conn, $reportSql);
+                                                            if ($policeStatus == 'Assigned') {
+                                                                echo '<span class="text-success">Assigned</span>';
+                                                            } else {
+                                                                $reportSql = "SELECT id, incident_type FROM report WHERE assignedpolice='None'";
+                                                                $reportQuery = mysqli_query($conn, $reportSql);
 
-                                                            if (mysqli_num_rows($reportQuery) > 0) {
-                                                                if ($policeStatus == 'Assigned') {
-                                                                    echo '<span class="text-success">Assigned</span>';
-                                                                } else {
+                                                                if (mysqli_num_rows($reportQuery) > 0) {
                                                                     echo '<select name="report_id" class="form-select">';
                                                                     foreach ($reportQuery as $reportOption) {
                                                                         $selected = ($reportOption['id'] == $report['assignedpolice']) ? 'selected' : '';
@@ -376,6 +375,7 @@
                                                                 }
                                                             }
                                                             ?>
+
 
                                                     </td>
 
@@ -582,7 +582,7 @@ if (isset($_POST['update'])) {
             Swal.fire({
                 title: 'Updating Data',
                 html: 'It will close in <b></b> milliseconds.',
-                timer: 500,
+                timer: 300,
                 timerProgressBar: true,
                 didOpen: () => {
                     Swal.showLoading()
@@ -642,7 +642,7 @@ if (isset($_POST['assignReport'])) {
                     Swal.fire({
                         title: "Assigning Police",
                         html: "It will close in <b></b> milliseconds.",
-                        timer: 500,
+                        timer: 300,
                         timerProgressBar: true,
                         didOpen: () => {
                             Swal.showLoading();
@@ -667,4 +667,3 @@ if (isset($_POST['assignReport'])) {
         }
     }
 }
-?>
