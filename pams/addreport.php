@@ -154,7 +154,11 @@
     }
 
 
-    /* Responsive */
+    .table th,
+    .table td {
+        text-align: center;
+    }
+
 
     @media (min-width:768px) {
         .content {
@@ -323,7 +327,7 @@
                                 <br>
                                 <div class="row g-2">
                                     <div class="col">
-                                        <select class="form-select" name="specialty" id="specialty" required>
+                                        <select class="form-select" name="specialty" id="specialty">
                                             <option value="">-- Select Police Specialty --</option>
                                             <option value="Traffic Management">Traffic Management</option>
                                             <option value="Drug Enforcement">Drug Enforcement</option>

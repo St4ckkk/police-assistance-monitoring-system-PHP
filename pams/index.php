@@ -23,7 +23,6 @@
     <script src="https://kit.fontawesome.com/ae360af17e.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 
-    <!-- Custom CSS -->
     <style>
         body {
             position: relative;
@@ -41,7 +40,6 @@
         body::before {
             content: "";
             background: rgba(0, 0, 0, 0.5);
-            /* Adjust the last value for the darkness level */
             position: absolute;
             top: 0;
             left: 0;

@@ -153,8 +153,25 @@
         margin: auto;
     }
 
+    .table th,
+    .table td {
+        text-align: center;
+    }
 
-    /* Responsive */
+
+
+
+    .status-column.status-verified {
+        color: #28a745;
+    }
+
+    .status-column.status-done {
+        color: #28a745;
+    }
+
+    .status-column.status-processing {
+        color: #dc3545;
+    }
 
     @media (min-width:768px) {
         .content {
@@ -312,7 +329,13 @@
                                             <td><?= $report['incident_type'] ?></td>
                                             <td><?= $report['instruction'] ?></td>
                                             <td><?= $report['fullname'] ?></td>
-                                            <td><?= $report['status'] ?></td>
+
+                                            <td class="status-column <?= $report['status'] === 'Verified' ? 'status-verified' : ($report['status'] === 'Done' ? 'status-done' : 'status-processing') ?>">
+                                                <?= $report['status'] ?>
+                                                <?php if ($report['status'] === 'Verified') : ?>
+                                                    <i class="bx bx-check-circle"></i>
+                                                <?php endif; ?>
+                                            </td>
 
                                         </tr>
                                 <?php

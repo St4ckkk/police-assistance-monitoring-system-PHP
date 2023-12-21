@@ -213,7 +213,12 @@
     }
 
 
-    /* Responsive */
+
+    .table th,
+    .table td {
+        text-align: center;
+    }
+
 
     @media (min-width:768px) {
         .content {

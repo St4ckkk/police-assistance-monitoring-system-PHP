@@ -101,7 +101,7 @@
         z-index: 1111;
     }
 
-    /* Sidebar collapse */
+
 
     #sidebar.collapsed {
         margin-left: -264px;
@@ -192,8 +192,22 @@
         text-align: center;
     }
 
+    .status-column {
+        text-align: center;
+    }
 
-    /* Responsive */
+    .status-column.status-verified {
+        color: #28a745;
+    }
+
+    .status-column.status-done {
+        color: #28a745;
+    }
+
+    .status-column.status-processing {
+        color: #dc3545;
+    }
+
 
     @media (min-width:768px) {
         .content {
@@ -269,24 +283,28 @@
     </div>
     <!--Delete modal-->
     <div class="modal fade" id="ups" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog  modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
                     <form method="POST">
                         <div class="form-group">
                             <input type="hidden" name="delete_ids" id="delete_ids" class="form-control">
-
-                            <input type="hidden" id="myInputField" name="status">
+                            <label for="statusDropdown">Choose Status:</label>
+                            <select class="form-select" id="statusDropdown" name="status">
+                                <option value="OnProcessing">On Processing</option>
+                                <option value="Verified">Verified</option>
+                                <option value="Done">Done</option>
+                            </select>
                         </div>
-                        <div class="text-center">
-                            <button type="submit" name="done" class="btn btn-primary">Report Done</button>
+                        <div class="mt-3 text-center w-100">
+                            <button type="submit" name="done" class="btn btn-primary">Update Status</button>
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
     </div>
+
     <div class="wrapper">
         <!-- Sidebar -->
         <aside id="sidebar">
@@ -404,7 +422,13 @@
                                                 </div>
                                             </td>
 
-                                            <td><?= $report['status'] ?></td>
+                                            <td class="status-column <?= $report['status'] === 'Verified' ? 'status-verified' : ($report['status'] === 'Done' ? 'status-done' : 'status-processing') ?>">
+                                                <?= $report['status'] ?>
+                                                <?php if ($report['status'] === 'Verified') : ?>
+                                                    <i class="bx bx-check-circle"></i>
+                                                <?php endif; ?>
+                                            </td>
+
                                             <div class="modal fade" id="evidenceModal<?= $report['id'] ?>" tabindex="-1" aria-labelledby="evidenceModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content">

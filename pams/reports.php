@@ -218,6 +218,7 @@
                                 <a href="reports.php" class="sidebar-link">Reports</a>
                             </li>
                         </ul>
+                    </li>
                     <li a class="sidebar-item">
                         <a href="logout.php" class="sidebar-link">
                             <i class="fa-solid fa-right-from-bracket"></i>

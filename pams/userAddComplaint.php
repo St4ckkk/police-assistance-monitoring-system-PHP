@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="node_modules/datatables.net-bs5/css/dataTables.bootstrap5.min.css" />
     <link rel="stylesheet" href="node_modules/font-awesome/css/all.min.css" />
     <link href='node_modules/boxicons/css/boxicons.min.css' rel='stylesheet'>
-
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqIyP7wRCkaJqVUMK2x-Ypz20oGqLjSjc&libraries=places"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/datatables.net/js/jquery.dataTables.js"></script>
@@ -280,7 +280,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <input type="hidden" name="status" value="OnGoing">
+                                    <input type="hidden" name="status" value="Not Verified">
                                     <input type="hidden" name="assignedpolice" value="None">
                                     <label for="incidentDetails" class="form-label">Provide Specific Incident Details</label>
                                     <textarea name="instruction" id="incidentDetails" rows="4" class="form-control"></textarea>
